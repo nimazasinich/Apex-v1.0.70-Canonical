@@ -73,7 +73,18 @@ if (process.argv.includes('--check')) {
     process.exit(1);
   }
   const current = JSON.parse(fs.readFileSync(output, 'utf8'));
-  const mismatches = ['version', 'buildId', 'sourceHash'].filter((field) => current[field] !== payload[field]);
+  const mismatches = ['version', 'sourceHash'].filter((field) => current[field] !== payload[field]);
+  // `buildId` encodes whether the working tree was dirty when the identity was generated, and that
+  // is not stable across a single build: identity is generated before Vite, while later build steps
+  // rewrite tracked files (e.g. Doc/FUNCTION_INDEX.*) and flip `dirtyTree` from false to true.
+  // Comparing against a single freshly recomputed variant therefore reported `stale identity:
+  // buildId` immediately after a clean, successful build. Accept either derivation for the current
+  // commit + sourceHash instead; genuine staleness is still caught by `version`/`sourceHash` above
+  // and by a changed commit here.
+  const acceptedBuildIds = commit
+    ? [commit, `${commit.slice(0, 8)}-${sourceHash.slice(0, 8)}`]
+    : [sourceHash];
+  if (!acceptedBuildIds.includes(current.buildId)) mismatches.push('buildId');
   if (mismatches.length) {
     console.error(`[build-identity] stale identity: ${mismatches.join(', ')}`);
     process.exit(1);
