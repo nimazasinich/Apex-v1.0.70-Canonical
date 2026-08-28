@@ -73,6 +73,17 @@ jobs:
           npm run index:docs:check
           npm run docs:check
 
+      # TEMP DIAGNOSTIC (remove once the drift cause is confirmed): surface the
+      # actual diff as annotations, since raw job logs aren't reachable for
+      # inspection otherwise.
+      - name: TEMP debug drift diff
+        if: matrix.node == '24.x'
+        shell: bash
+        run: |
+          git diff -- Doc/FUNCTION_INDEX.md Doc/FUNCTION_INDEX.json Doc/DOCUMENTATION_INDEX.md Doc/DOCUMENTATION_INDEX.json > /tmp/drift.diff || true
+          wc -l /tmp/drift.diff
+          head -c 60000 /tmp/drift.diff | while IFS= read -r line; do echo "::warning::$line"; done
+
       - name: Fail if generated docs drifted from committed state
         if: matrix.node == '24.x'
         shell: bash
