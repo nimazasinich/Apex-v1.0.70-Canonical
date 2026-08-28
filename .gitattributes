@@ -1,0 +1,10 @@
+# Source is authored and committed with LF. The CI matrix runs on
+# windows-latest, where Git's default core.autocrlf=true rewrites every text
+# file to CRLF on checkout. Doc/FUNCTION_INDEX.* and Doc/DOCUMENTATION_INDEX.*
+# are keyed off a raw-byte sha256 of each source file (see
+# scripts/utilities/generateFunctionIndex.mts), so that rewrite changed every
+# hash on every Windows checkout and made the "generated docs drifted" gate
+# fail regardless of whether anything had actually changed. Force LF on
+# checkout so the byte content — and therefore the hash — matches what was
+# committed.
+* text=auto eol=lf
