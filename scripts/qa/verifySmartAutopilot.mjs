@@ -31,7 +31,23 @@ check('one-click persistent Smart Autopilot controls are wired globally and on b
 
 check('global Autopilot control exposes authoritative server phase', headerControl.includes('data-autopilot-phase={phase}') && headerControl.includes('controller.phase') && headerControl.includes('controller.enabled') && headerControl.includes('controller.armedBy'));
 check('browser boot preference never auto-stops an ENV/operator controller', controllerHook.includes('persisted operator') && controllerHook.includes("if (desiredEnabled && !snapshot.enabled) void send('START')") && !controllerHook.includes("send(desiredEnabled ? 'START' : 'STOP')"));
-check('strong Autopilot lifecycle runtime is a required runtime verification gate', String(packageJson.scripts?.['test:runtime'] || '').includes('qa:autopilot-lifecycle-runtime'));
+// This check previously asserted the inverse — that `test:runtime` MUST contain
+// `qa:autopilot-lifecycle-runtime`. Commit 4dc795a removed that wiring from every gate chain on
+// purpose (the runner boots a real server and needs live KuCoin/Binance market data, which
+// hosted runners cannot reach: US-region IPs are blocked/throttled, so it fails
+// `server_not_reachable` regardless of source changes), and CLAUDE.md now carries a standing rule
+// against re-wiring it. 4dc795a updated package.json, gateDependencyMap.mjs and CLAUDE.md but not
+// this line, leaving check:source-contracts — and therefore verify:pr — unsatisfiable on every
+// clean checkout. Standalone-only is also the original contract: the script was added "additive
+// only; `verify` and the release gates were deliberately left untouched, since the runtime
+// verifier needs network and minutes" (Doc/repository/handoffs/APEX_SESSION_HANDOFF.md).
+// So assert the standing rule instead of contradicting it: the standalone script must still
+// exist, and no other package script may pull it into a chain.
+const autopilotRuntimeKey = 'qa:autopilot-lifecycle-runtime';
+const autopilotRuntimeChains = Object.entries(packageJson.scripts || {})
+  .filter(([key, value]) => key !== autopilotRuntimeKey && String(value).includes(autopilotRuntimeKey))
+  .map(([key]) => key);
+check('strong Autopilot lifecycle runtime stays a standalone, human-run verification', String(packageJson.scripts?.[autopilotRuntimeKey] || '').includes('runAutopilotLifecycleRuntime') && autopilotRuntimeChains.length === 0, autopilotRuntimeChains.length ? `must never be wired into a gate chain (CLAUDE.md standing rule); found in: ${autopilotRuntimeChains.join(', ')}` : '');
 check('autopilot cycles every five minutes', optimizationHook.includes('window.setInterval(() => void runAutopilotOptimization(), 5 * 60_000)'));
 check('autopilot uses bounded multi-market rotating contexts', optimizationHook.includes('maxContexts: 6') && optimizationHook.includes('symbols: marketOptions.slice(0, 4)') && autopilot.includes('startOffset = (cycleIndex * maxContexts) % all.length'));
 check('strategy × market × timeframe × direction planner exists', autopilot.includes('buildSmartAutopilotPlan') && autopilot.includes("strategy.longShort === 'BOTH'") && autopilot.includes('preferredIntervalOrder'));
