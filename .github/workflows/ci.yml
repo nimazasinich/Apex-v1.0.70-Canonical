@@ -86,7 +86,7 @@ jobs:
 
       - name: Upload function index / audit artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: apex-verify-artifacts-node-${{ matrix.node }}
           path: |
@@ -156,7 +156,7 @@ jobs:
 
       - name: Upload visual QA diff artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: apex-visual-qa-artifacts
           path: |
