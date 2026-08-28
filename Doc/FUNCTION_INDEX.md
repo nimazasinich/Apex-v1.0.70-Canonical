@@ -14,7 +14,7 @@ Use this index before opening large files. Search by function name, tag, or file
 ## Summary
 
 - Total indexed symbols: 3818
-- Generated at: 2026-08-28T08:56:45.661Z
+- Generated at: 2026-08-28T09:06:20.957Z
 
 ## Tag Index
 
@@ -6935,8 +6935,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `candlesFromCloses` | function | 52-61 | no | no | `test` |
-| `trade` | function | 63-81 | no | no | `test` |
+| `candlesFromCloses` | function | 63-72 | no | no | `test` |
+| `trade` | function | 74-92 | no | no | `test` |
 
 ### tests/riskGovernor.test.ts
 

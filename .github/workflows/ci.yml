@@ -41,22 +41,6 @@ jobs:
       - name: Install dependencies (npm ci)
         run: npm ci
 
-      # QA/ is gitignored (sealed holdout data isn't committed), so
-      # tests/research/walkForwardHarness.test.ts has nothing to load on a
-      # clean checkout. Cache by symbol/date range: the acquired range is
-      # fixed historical data (2020-2025), so once fetched from
-      # data.binance.vision it never needs to be fetched again.
-      - name: Cache sealed holdout research data
-        id: holdout-cache
-        uses: actions/cache@v4
-        with:
-          path: QA/profitability-structural-remediation/data
-          key: holdout-data-btcusdt-ethusdt-2020-2025-v1
-
-      - name: Acquire sealed holdout research data
-        if: steps.holdout-cache.outputs.cache-hit != 'true'
-        run: npx tsx scripts/research/acquireProfitabilityData.mts
-
       # Keep dependency-backed source/unit/runtime/build/release evidence in
       # this job. Browser and visual gates belong exclusively to verify-visual
       # below, where Chromium is installed explicitly.

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T08:56:45.642Z",
+  "generatedAt": "2026-08-28T09:06:20.906Z",
   "process": "Apex Function Atlas",
   "fileHashes": {
     "server.ts": "4a1829fbb3a096f5",
@@ -703,7 +703,7 @@
     "tests/canonicalReplayUpgrade.test.ts": "bdf48f9ebaef9eb4",
     "tests/intelligence.test.ts": "4bb3509e495ace04",
     "tests/research/onlineAllocator.test.ts": "2269822cc3747c72",
-    "tests/research/walkForwardHarness.test.ts": "d4b787652b19d1a7",
+    "tests/research/walkForwardHarness.test.ts": "6d2322f5e5de6863",
     "tests/riskGovernor.test.ts": "c1cd33f64e88ed2f",
     "tests/trackingDisplay.test.ts": "f6468ec7b45d0e3f",
     "tests/v3-contract-static.mjs": "755daa6dcf00e613",
@@ -74203,8 +74203,8 @@
       "qualname": "candlesFromCloses",
       "kind": "function",
       "file": "tests/research/walkForwardHarness.test.ts",
-      "line": 52,
-      "lineEnd": 61,
+      "line": 63,
+      "lineEnd": 72,
       "exported": false,
       "async": false,
       "params": [
@@ -74224,8 +74224,8 @@
       "qualname": "trade",
       "kind": "function",
       "file": "tests/research/walkForwardHarness.test.ts",
-      "line": 63,
-      "lineEnd": 81,
+      "line": 74,
+      "lineEnd": 92,
       "exported": false,
       "async": false,
       "params": [

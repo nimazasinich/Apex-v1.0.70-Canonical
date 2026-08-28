@@ -7,9 +7,13 @@
  * multi-symbol drawdown is measured along the path the account actually took.
  */
 
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import {
+  DATA_DIR,
   DEVELOPMENT_FROM_MS,
   HoldoutLeakageError,
   SEALED_HOLDOUT_FROM_MS,
@@ -20,6 +24,13 @@ import {
   resampleCandles,
   type Candle,
 } from '../../scripts/research/lib/researchDataset';
+
+// The sealed holdout dataset is acquired locally (via
+// scripts/research/acquireProfitabilityData.mts) and QA/ is gitignored, so a
+// clean checkout — including every hosted CI runner, which cannot reach
+// Binance's API from a US IP anyway — never has it. Skip only the one test
+// that needs the real file rather than failing CI on missing local data.
+const HAS_SEALED_HOLDOUT_DATA = existsSync(join(DATA_DIR, 'btcusdt-candles-1h.json'));
 import {
   WalkForwardConfigurationError,
   assertSplitsAreCausal,
@@ -98,7 +109,7 @@ describe('sealed holdout guard', () => {
     ).not.toThrow();
   });
 
-  it('keeps the guard on real loaded data', () => {
+  it.skipIf(!HAS_SEALED_HOLDOUT_DATA)('keeps the guard on real loaded data', () => {
     const loaded = loadDevelopmentCandles('BTCUSDT');
     expect(loaded.rows.length).toBeGreaterThan(20_000);
     expect(loaded.rows[0].t).toBeGreaterThanOrEqual(DEVELOPMENT_FROM_MS);
