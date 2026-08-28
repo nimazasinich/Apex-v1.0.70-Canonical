@@ -21,7 +21,11 @@ fs.writeFileSync(path.join(nodeModules, 'undici', 'index.js'), `
 class Agent { compose(){ return this; } }
 class ProxyAgent {}
 const interceptors = { dns(){ return {}; } };
-module.exports = { Agent, ProxyAgent, interceptors };
+const fetch = (...args) => {
+  globalThis.__apexQaUndiciFetchCount = (globalThis.__apexQaUndiciFetchCount || 0) + 1;
+  return globalThis.fetch(...args);
+};
+module.exports = { Agent, ProxyAgent, interceptors, fetch };
 `);
 fs.writeFileSync(path.join(nodeModules, 'socks-proxy-agent', 'index.js'), `
 class SocksProxyAgent {}
@@ -61,6 +65,7 @@ Object.assign(process.env, {
 
 let fetchCount = 0;
 let mode = 'success';
+globalThis.__apexQaUndiciFetchCount = 0;
 globalThis.fetch = async (url, options = {}) => {
   fetchCount += 1;
   if (mode === 'fail') throw new Error('The operation was aborted due to timeout');
@@ -68,7 +73,19 @@ globalThis.fetch = async (url, options = {}) => {
   return { ok: true, status: 200, json: async () => ({ url, fetchCount, method: options.method || 'GET', authorization: options.headers?.Authorization || options.headers?.authorization || null }) };
 };
 
-const governor = require(modulePath);
+// proxyFetch intentionally resolves the standalone undici build from the
+// application working directory so its fetch and Dispatcher always match.
+// Load the transpiled module with the fixture directory as cwd; otherwise this
+// QA script resolves the repository's real undici package, bypasses the fetch
+// fixture above, and accidentally performs DNS/network I/O against *.example.
+const originalCwd = process.cwd();
+let governor;
+try {
+  process.chdir(temp);
+  governor = require(modulePath);
+} finally {
+  process.chdir(originalCwd);
+}
 
 const background = [];
 for (let index = 0; index < 8; index += 1) {
@@ -90,6 +107,7 @@ const critical = await governor.smartFetchJson('https://critical.example/backtes
 const criticalMs = Date.now() - criticalStartedAt;
 const backgroundResults = await Promise.all(background);
 assert.equal(critical.ok, true);
+assert.ok(globalThis.__apexQaUndiciFetchCount > 0, 'dispatcher-bearing requests must use the matching undici fetch fixture');
 assert.ok(criticalMs < 180, `critical request starved for ${criticalMs}ms`);
 const backgroundShed = backgroundResults.filter((result) => result.error === 'backpressure').length;
 assert.ok(backgroundShed >= 2);
@@ -158,6 +176,7 @@ const result = {
   staleFallback: true,
   authorizationIsolation: true,
   mutationsNotCached: true,
+  matchingUndiciFetch: true,
   criticalMs,
   backgroundShed,
 };
