@@ -17,7 +17,7 @@
  * streamed straight through (stdio: 'inherit'), so this is a drop-in
  * replacement, not a black box.
  *
- * Usage: npm run build   (now calls: tsx scripts/utilities/buildAndBundle.mts)
+ * Usage: npm run build   (now calls: node --import tsx scripts/utilities/buildAndBundle.mts)
  */
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
