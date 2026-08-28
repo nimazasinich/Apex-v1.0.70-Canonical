@@ -82,6 +82,12 @@ npm-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated build identity (scripts/utilities/generateBuildIdentity.mjs writes
+# this during `npm run build`; check:build-identity only means something after
+# a real build has produced a fresh one -- see C1 in
+# APEX_CI_GATE_RATIONALIZATION_CONTINUATION_PROMPT.md).
+public/build-info.json
 # APEX Project Intelligence Hub local outputs
 .apex-index/
 package.json.apex-hub.bak
