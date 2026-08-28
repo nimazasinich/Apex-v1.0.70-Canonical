@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T19:37:33.817Z",
+  "generatedAt": "2026-08-28T19:44:49.797Z",
   "process": "Apex Function Atlas",
   "fileHashes": {
     "server.ts": "4a1829fbb3a096f5",
@@ -550,15 +550,17 @@
     "scripts/capture/verifyStep1Chrome.mts": "04d624f8b031189c",
     "scripts/gates/checkBuildIdentity.mjs": "a354e0a0c38f7f00",
     "scripts/gates/checkCssArbitraryColors.mjs": "d3ab9496544acd4d",
+    "scripts/gates/checkLockfilePlatformCoverage.mjs": "783788c469a5720b",
     "scripts/gates/checkNoSecretsInRelease.mjs": "073c4581cb30086c",
     "scripts/gates/checkReleaseArtifacts.mjs": "4b0b668e03ad2b17",
     "scripts/gates/checkRootContract.mjs": "11c62539d15a3545",
     "scripts/gates/checkTestInventory.mjs": "c6f548f3bad02bb1",
     "scripts/gates/checkVersionIdentity.mjs": "04f7859816cbe58c",
     "scripts/gates/computeChangedScope.mjs": "9629d3d6af2d0f49",
-    "scripts/gates/gateDependencyMap.mjs": "2358a71a93eb55cc",
+    "scripts/gates/gateDependencyMap.mjs": "d254d7ea742f7b9c",
     "scripts/gates/runAutopilotLifecycleRuntime.mjs": "eff4dab830620a4c",
     "scripts/gates/verifyFast.mjs": "9397e3e2807c1d25",
+    "scripts/gates/verifySealedHoldoutEvidence.mjs": "881beb7050d1b606",
     "scripts/lib/captureServer.mts": "3e2cd0ebcec1d489",
     "scripts/lib/decisionMemoryLoader.mts": "50cfe14cb35aa525",
     "scripts/qa/_qa_cdp_matched.mts": "1bf4a813dda045c8",
@@ -2448,6 +2450,25 @@
       "docstring": ""
     },
     {
+      "name": "fail",
+      "qualname": "fail",
+      "kind": "function",
+      "file": "scripts/gates/checkLockfilePlatformCoverage.mjs",
+      "line": 41,
+      "lineEnd": 55,
+      "exported": false,
+      "async": false,
+      "params": [
+        "missing"
+      ],
+      "returns": "inferred",
+      "tags": [
+        "script"
+      ],
+      "signature": "function fail(missing) {",
+      "docstring": ""
+    },
+    {
       "name": "forbiddenPath",
       "qualname": "forbiddenPath",
       "kind": "function",
@@ -2887,8 +2908,8 @@
       "qualname": "globToRegExp",
       "kind": "function",
       "file": "scripts/gates/gateDependencyMap.mjs",
-      "line": 270,
-      "lineEnd": 296,
+      "line": 276,
+      "lineEnd": 302,
       "exported": true,
       "async": false,
       "params": [
@@ -2906,8 +2927,8 @@
       "qualname": "matchesAny",
       "kind": "function",
       "file": "scripts/gates/gateDependencyMap.mjs",
-      "line": 299,
-      "lineEnd": 304,
+      "line": 305,
+      "lineEnd": 310,
       "exported": true,
       "async": false,
       "params": [
@@ -3242,6 +3263,26 @@
         "script"
       ],
       "signature": "function main() {",
+      "docstring": ""
+    },
+    {
+      "name": "report",
+      "qualname": "report",
+      "kind": "function",
+      "file": "scripts/gates/verifySealedHoldoutEvidence.mjs",
+      "line": 44,
+      "lineEnd": 48,
+      "exported": false,
+      "async": false,
+      "params": [
+        "state",
+        "detail"
+      ],
+      "returns": "inferred",
+      "tags": [
+        "script"
+      ],
+      "signature": "function report(state, detail) {",
       "docstring": ""
     },
     {

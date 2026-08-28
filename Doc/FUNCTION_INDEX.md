@@ -13,8 +13,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 ## Summary
 
-- Total indexed symbols: 3820
-- Generated at: 2026-08-28T19:37:33.837Z
+- Total indexed symbols: 3822
+- Generated at: 2026-08-28T19:44:49.817Z
 
 ## Tag Index
 
@@ -27,7 +27,7 @@ Use this index before opening large files. Search by function name, tag, or file
 - `ml`: 196
 - `provider`: 106
 - `scanner`: 30
-- `script`: 829
+- `script`: 831
 - `server`: 80
 - `service`: 1912
 - `test`: 157
@@ -241,6 +241,12 @@ Use this index before opening large files. Search by function name, tag, or file
 | `collectFiles` | function | 46-61 | no | no | `script` |
 | `scanFile` | function | 63-82 | no | no | `script` |
 
+### scripts/gates/checkLockfilePlatformCoverage.mjs
+
+| Name | Kind | Line | Export | Async | Tags |
+|---|---|---:|---|---|---|
+| `fail` | function | 41-55 | no | no | `script` |
+
 ### scripts/gates/checkNoSecretsInRelease.mjs
 
 | Name | Kind | Line | Export | Async | Tags |
@@ -298,8 +304,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `globToRegExp` | function | 270-296 | yes | no | `script` |
-| `matchesAny` | function | 299-304 | yes | no | `script` |
+| `globToRegExp` | function | 276-302 | yes | no | `script` |
+| `matchesAny` | function | 305-310 | yes | no | `script` |
 
 ### scripts/gates/runAutopilotLifecycleRuntime.mjs
 
@@ -327,6 +333,12 @@ Use this index before opening large files. Search by function name, tag, or file
 | `decide` | function | 106-124 | no | no | `script` |
 | `runGate` | function | 126-144 | no | no | `script` |
 | `main` | function | 146-241 | no | no | `script` |
+
+### scripts/gates/verifySealedHoldoutEvidence.mjs
+
+| Name | Kind | Line | Export | Async | Tags |
+|---|---|---:|---|---|---|
+| `report` | function | 44-48 | no | no | `script` |
 
 ### scripts/lib/captureServer.mts
 
