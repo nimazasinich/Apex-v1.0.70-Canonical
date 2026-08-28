@@ -1,10 +1,10 @@
 # APEX Documentation Index
 
-Generated: 2026-08-28T09:06:22.542Z
+Generated: 2026-08-28T21:22:20.809Z
 
 This file is generated from the current `Doc/` tree. Use `Doc/README.md` for the short operating guide and `Refrence.md` for agent navigation rules.
 
-Documented files: 240
+Documented files: 241
 
 ## Active documentation
 
@@ -161,6 +161,7 @@ Documented files: 240
 | [`automation/rejected_replay/REJECTED_REPLAY_REPORT_v1.md`](./automation/rejected_replay/REJECTED_REPLAY_REPORT_v1.md) | APEX Rejected Candidate Replay Report v1 | md | 2026-08-28 |
 | [`FUNCTION_INDEX.json`](./FUNCTION_INDEX.json) | FUNCTION INDEX | json | 2026-08-28 |
 | [`FUNCTION_INDEX.md`](./FUNCTION_INDEX.md) | APEX Function Atlas | md | 2026-08-28 |
+| [`generated/APEX_COMPLETE_VISUAL_PROJECT_DOCUMENTATION.html`](./generated/APEX_COMPLETE_VISUAL_PROJECT_DOCUMENTATION.html) | APEX v1.0.56 — Visual Architecture & File Layer Atlas | html | 2026-08-28 |
 
 ## Historical documentation
 
