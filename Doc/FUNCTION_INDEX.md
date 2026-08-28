@@ -13,8 +13,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 ## Summary
 
-- Total indexed symbols: 3818
-- Generated at: 2026-08-28T09:06:20.957Z
+- Total indexed symbols: 3819
+- Generated at: 2026-08-28T09:47:27.223Z
 
 ## Tag Index
 
@@ -27,11 +27,11 @@ Use this index before opening large files. Search by function name, tag, or file
 - `ml`: 196
 - `provider`: 106
 - `scanner`: 30
-- `script`: 827
+- `script`: 828
 - `server`: 80
 - `service`: 1912
-- `test`: 154
-- `ui`: 355
+- `test`: 157
+- `ui`: 352
 
 ## Functions By File
 
@@ -747,6 +747,12 @@ Use this index before opening large files. Search by function name, tag, or file
 |---|---|---:|---|---|---|
 | `read` | arrow | 6-6 | no | no | `script` |
 | `exists` | arrow | 7-7 | no | no | `script` |
+
+### scripts/qa/verifyLiveDataTruthfulness.mjs
+
+| Name | Kind | Line | Export | Async | Tags |
+|---|---|---:|---|---|---|
+| `walk` | function | 30-53 | no | no | `script` |
 
 ### scripts/qa/verifyMaximalMergeSafety.mjs
 
@@ -1757,7 +1763,7 @@ Use this index before opening large files. Search by function name, tag, or file
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
 | `initialPage` | function | 119-123 | no | no |  |
-| `App` | component | 125-628 | yes | no | `component` |
+| `App` | component | 125-614 | yes | no | `component` |
 | `bootstrap` | arrow | 386-408 | no | yes |  |
 | `loadDetail` | arrow | 443-486 | no | yes |  |
 | `onHashChange` | arrow | 493-493 | no | no |  |
@@ -2322,25 +2328,22 @@ Use this index before opening large files. Search by function name, tag, or file
 | `reviewAgain` | arrow | 888-892 | no | no | `ui` |
 | `submit` | arrow | 894-919 | no | yes | `ui` |
 | `RiskOverviewPanel` | component | 1054-1083 | yes | no | `component`, `ui` |
-| `buildTradingLabCandles` | function | 1091-1124 | no | no | `ui` |
-| `buildTradingLabDepth` | function | 1126-1141 | no | no | `ui` |
-| `buildTradingLabPreview` | function | 1143-1301 | no | no | `ui` |
-| `DepthCurveChart` | component | 1330-1380 | yes | no | `component`, `ui` |
-| `yFor` | arrow | 1343-1343 | no | no | `ui` |
-| `xForBid` | arrow | 1344-1344 | no | no | `ui` |
-| `xForAsk` | arrow | 1345-1345 | no | no | `ui` |
-| `MarketDepthPanel` | component | 1382-1462 | yes | no | `component`, `market-data`, `ui` |
-| `renderRows` | arrow | 1419-1433 | no | no | `ui` |
-| `RecentTradesPanel` | component | 1464-1471 | yes | no | `component`, `ui` |
-| `SystemLinkPanel` | component | 1480-1501 | yes | no | `component`, `ml`, `ui` |
-| `SetupIntelligencePanel` | component | 1514-1561 | yes | no | `component`, `ui` |
-| `TradingActivityPanel` | component | 1573-1657 | no | no | `component`, `ui` |
-| `TradingViewCore` | component | 1659-1909 | no | no | `component`, `ui` |
-| `refreshAlerts` | arrow | 1688-1688 | no | no | `ui` |
-| `pickDepthPrice` | arrow | 1751-1753 | no | no | `ui` |
-| `renderStrategyContextPanel` | arrow | 1800-1800 | no | no | `ui` |
-| `closeInlineTool` | arrow | 1802-1802 | no | no | `ui` |
-| `TradingView` | component | 1911-1933 | yes | no | `component`, `ui` |
+| `DepthCurveChart` | component | 1113-1163 | yes | no | `component`, `ui` |
+| `yFor` | arrow | 1126-1126 | no | no | `ui` |
+| `xForBid` | arrow | 1127-1127 | no | no | `ui` |
+| `xForAsk` | arrow | 1128-1128 | no | no | `ui` |
+| `MarketDepthPanel` | component | 1165-1245 | yes | no | `component`, `market-data`, `ui` |
+| `renderRows` | arrow | 1202-1216 | no | no | `ui` |
+| `RecentTradesPanel` | component | 1247-1254 | yes | no | `component`, `ui` |
+| `SystemLinkPanel` | component | 1263-1284 | yes | no | `component`, `ml`, `ui` |
+| `SetupIntelligencePanel` | component | 1297-1344 | yes | no | `component`, `ui` |
+| `TradingActivityPanel` | component | 1356-1440 | no | no | `component`, `ui` |
+| `TradingViewCore` | component | 1442-1690 | no | no | `component`, `ui` |
+| `refreshAlerts` | arrow | 1471-1471 | no | no | `ui` |
+| `pickDepthPrice` | arrow | 1532-1534 | no | no | `ui` |
+| `renderStrategyContextPanel` | arrow | 1581-1581 | no | no | `ui` |
+| `closeInlineTool` | arrow | 1583-1583 | no | no | `ui` |
+| `TradingView` | component | 1692-1694 | yes | no | `component`, `ui` |
 
 ### src/components/workspace/AutopilotHeaderControl.tsx
 
@@ -6924,6 +6927,14 @@ Use this index before opening large files. Search by function name, tag, or file
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
 | `candles` | function | 5-17 | no | no | `test` |
+
+### tests/fixtures/tradingLabFixtures.ts
+
+| Name | Kind | Line | Export | Async | Tags |
+|---|---|---:|---|---|---|
+| `buildTradingLabCandles` | function | 30-63 | yes | no | `test` |
+| `buildTradingLabDepth` | function | 65-80 | yes | no | `test` |
+| `buildTradingLabPreview` | function | 82-247 | yes | no | `test` |
 
 ### tests/research/onlineAllocator.test.ts
 

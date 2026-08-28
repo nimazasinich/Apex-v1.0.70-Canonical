@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-08-28T09:06:20.906Z",
+  "generatedAt": "2026-08-28T09:47:27.199Z",
   "process": "Apex Function Atlas",
   "fileHashes": {
     "server.ts": "4a1829fbb3a096f5",
-    "src/App.tsx": "ebf556e70f316026",
+    "src/App.tsx": "928c8e351745a5df",
     "src/components/BacktestChart.tsx": "f7917fa3ca7d1815",
     "src/components/BacktestModal.tsx": "3308cc596722523e",
     "src/components/BacktestTradesTable.tsx": "be60529f928ec9cf",
@@ -62,7 +62,7 @@
     "src/components/ui/ServiceWorkerUpdateBanner.tsx": "58db91f6de44bbdc",
     "src/components/ui/WorkspaceFeedbackCenter.tsx": "633b99b40057deae",
     "src/components/ui/WorkspacePrimitives.tsx": "abb316ef1c6544cd",
-    "src/components/workspace/AccountViews.tsx": "8a6e75c1a0a8a728",
+    "src/components/workspace/AccountViews.tsx": "859ac1876e05777e",
     "src/components/workspace/AutopilotHeaderControl.tsx": "b8bb47ac8272dfe4",
     "src/components/workspace/DecisionJournalDrawer.tsx": "378d7b9fb3827998",
     "src/components/workspace/GeneralViews.tsx": "355f76b0754dea36",
@@ -610,6 +610,7 @@
     "scripts/qa/verifyLightTheme.mjs": "43d9c2038f0d732b",
     "scripts/qa/verifyLiquidityHunterBaseline.mjs": "6ffe7dde7a014d99",
     "scripts/qa/verifyLiquidityHunterFoundation.mjs": "b213d6b7d7f4a36f",
+    "scripts/qa/verifyLiveDataTruthfulness.mjs": "36254fe9703eb710",
     "scripts/qa/verifyMaximalMergeSafety.mjs": "cdf03e73b8c67b13",
     "scripts/qa/verifyMergedStageUi.mjs": "1dc98c16b0d8c8d1",
     "scripts/qa/verifyMultiAgentMultiTrading.mjs": "a3044e05410ddfec",
@@ -701,6 +702,7 @@
     "tests/adaptiveThresholdGovernance.test.ts": "0eaa13cfd57827ff",
     "tests/adaptiveThresholdGovernanceGuardrail.test.ts": "718c78782fd30fe9",
     "tests/canonicalReplayUpgrade.test.ts": "bdf48f9ebaef9eb4",
+    "tests/fixtures/tradingLabFixtures.ts": "85eb96ec50c2ac14",
     "tests/intelligence.test.ts": "4bb3509e495ace04",
     "tests/research/onlineAllocator.test.ts": "2269822cc3747c72",
     "tests/research/walkForwardHarness.test.ts": "6d2322f5e5de6863",
@@ -6827,6 +6829,25 @@
         "script"
       ],
       "signature": "(file) => fs.existsSync(path.join(root, file))",
+      "docstring": ""
+    },
+    {
+      "name": "walk",
+      "qualname": "walk",
+      "kind": "function",
+      "file": "scripts/qa/verifyLiveDataTruthfulness.mjs",
+      "line": 30,
+      "lineEnd": 53,
+      "exported": false,
+      "async": false,
+      "params": [
+        "dir"
+      ],
+      "returns": "inferred",
+      "tags": [
+        "script"
+      ],
+      "signature": "function walk(dir) {",
       "docstring": ""
     },
     {
@@ -18273,7 +18294,7 @@
       "kind": "component",
       "file": "src/App.tsx",
       "line": 125,
-      "lineEnd": 628,
+      "lineEnd": 614,
       "exported": true,
       "async": false,
       "params": [],
@@ -23532,73 +23553,12 @@
       "docstring": ""
     },
     {
-      "name": "buildTradingLabCandles",
-      "qualname": "buildTradingLabCandles",
-      "kind": "function",
-      "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1091,
-      "lineEnd": 1124,
-      "exported": false,
-      "async": false,
-      "params": [
-        "startPrice: number",
-        "count = 84",
-        "intervalMs = 15 * 60 * 1000"
-      ],
-      "returns": "Candle[]",
-      "tags": [
-        "ui"
-      ],
-      "signature": "function buildTradingLabCandles(startPrice: number, count = 84, intervalMs = 15 * 60 * 1000): Candle[] {",
-      "docstring": ""
-    },
-    {
-      "name": "buildTradingLabDepth",
-      "qualname": "buildTradingLabDepth",
-      "kind": "function",
-      "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1126,
-      "lineEnd": 1141,
-      "exported": false,
-      "async": false,
-      "params": [
-        "lastPrice: number",
-        "side: 'bid' | 'ask'",
-        "count = 12"
-      ],
-      "returns": "inferred",
-      "tags": [
-        "ui"
-      ],
-      "signature": "function buildTradingLabDepth(lastPrice: number, side: 'bid' | 'ask', count = 12) {",
-      "docstring": ""
-    },
-    {
-      "name": "buildTradingLabPreview",
-      "qualname": "buildTradingLabPreview",
-      "kind": "function",
-      "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1143,
-      "lineEnd": 1301,
-      "exported": false,
-      "async": false,
-      "params": [
-        "settings: TerminalSettings"
-      ],
-      "returns": "inferred",
-      "tags": [
-        "ui"
-      ],
-      "signature": "function buildTradingLabPreview(settings: TerminalSettings) {",
-      "docstring": ""
-    },
-    {
       "name": "DepthCurveChart",
       "qualname": "DepthCurveChart",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1330,
-      "lineEnd": 1380,
+      "line": 1113,
+      "lineEnd": 1163,
       "exported": true,
       "async": false,
       "params": [
@@ -23617,8 +23577,8 @@
       "qualname": "yFor",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1343,
-      "lineEnd": 1343,
+      "line": 1126,
+      "lineEnd": 1126,
       "exported": false,
       "async": false,
       "params": [
@@ -23636,8 +23596,8 @@
       "qualname": "xForBid",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1344,
-      "lineEnd": 1344,
+      "line": 1127,
+      "lineEnd": 1127,
       "exported": false,
       "async": false,
       "params": [
@@ -23655,8 +23615,8 @@
       "qualname": "xForAsk",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1345,
-      "lineEnd": 1345,
+      "line": 1128,
+      "lineEnd": 1128,
       "exported": false,
       "async": false,
       "params": [
@@ -23674,8 +23634,8 @@
       "qualname": "MarketDepthPanel",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1382,
-      "lineEnd": 1462,
+      "line": 1165,
+      "lineEnd": 1245,
       "exported": true,
       "async": false,
       "params": [
@@ -23695,8 +23655,8 @@
       "qualname": "renderRows",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1419,
-      "lineEnd": 1433,
+      "line": 1202,
+      "lineEnd": 1216,
       "exported": false,
       "async": false,
       "params": [
@@ -23715,8 +23675,8 @@
       "qualname": "RecentTradesPanel",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1464,
-      "lineEnd": 1471,
+      "line": 1247,
+      "lineEnd": 1254,
       "exported": true,
       "async": false,
       "params": [
@@ -23735,8 +23695,8 @@
       "qualname": "SystemLinkPanel",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1480,
-      "lineEnd": 1501,
+      "line": 1263,
+      "lineEnd": 1284,
       "exported": true,
       "async": false,
       "params": [
@@ -23756,8 +23716,8 @@
       "qualname": "SetupIntelligencePanel",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1514,
-      "lineEnd": 1561,
+      "line": 1297,
+      "lineEnd": 1344,
       "exported": true,
       "async": false,
       "params": [
@@ -23776,8 +23736,8 @@
       "qualname": "TradingActivityPanel",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1573,
-      "lineEnd": 1657,
+      "line": 1356,
+      "lineEnd": 1440,
       "exported": false,
       "async": false,
       "params": [
@@ -23796,8 +23756,8 @@
       "qualname": "TradingViewCore",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1659,
-      "lineEnd": 1909,
+      "line": 1442,
+      "lineEnd": 1690,
       "exported": false,
       "async": false,
       "params": [
@@ -23816,8 +23776,8 @@
       "qualname": "refreshAlerts",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1688,
-      "lineEnd": 1688,
+      "line": 1471,
+      "lineEnd": 1471,
       "exported": false,
       "async": false,
       "params": [],
@@ -23833,8 +23793,8 @@
       "qualname": "pickDepthPrice",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1751,
-      "lineEnd": 1753,
+      "line": 1532,
+      "lineEnd": 1534,
       "exported": false,
       "async": false,
       "params": [
@@ -23852,8 +23812,8 @@
       "qualname": "renderStrategyContextPanel",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1800,
-      "lineEnd": 1800,
+      "line": 1581,
+      "lineEnd": 1581,
       "exported": false,
       "async": false,
       "params": [],
@@ -23869,8 +23829,8 @@
       "qualname": "closeInlineTool",
       "kind": "arrow",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1802,
-      "lineEnd": 1802,
+      "line": 1583,
+      "lineEnd": 1583,
       "exported": false,
       "async": false,
       "params": [],
@@ -23886,8 +23846,8 @@
       "qualname": "TradingView",
       "kind": "component",
       "file": "src/components/workspace/AccountViews.tsx",
-      "line": 1911,
-      "lineEnd": 1933,
+      "line": 1692,
+      "lineEnd": 1694,
       "exported": true,
       "async": false,
       "params": [
@@ -74177,6 +74137,67 @@
         "test"
       ],
       "signature": "function candles(count = 140) {",
+      "docstring": ""
+    },
+    {
+      "name": "buildTradingLabCandles",
+      "qualname": "buildTradingLabCandles",
+      "kind": "function",
+      "file": "tests/fixtures/tradingLabFixtures.ts",
+      "line": 30,
+      "lineEnd": 63,
+      "exported": true,
+      "async": false,
+      "params": [
+        "startPrice: number",
+        "count = 84",
+        "intervalMs = 15 * 60 * 1000"
+      ],
+      "returns": "Candle[]",
+      "tags": [
+        "test"
+      ],
+      "signature": "export function buildTradingLabCandles(startPrice: number, count = 84, intervalMs = 15 * 60 * 1000): Candle[] {",
+      "docstring": ""
+    },
+    {
+      "name": "buildTradingLabDepth",
+      "qualname": "buildTradingLabDepth",
+      "kind": "function",
+      "file": "tests/fixtures/tradingLabFixtures.ts",
+      "line": 65,
+      "lineEnd": 80,
+      "exported": true,
+      "async": false,
+      "params": [
+        "lastPrice: number",
+        "side: 'bid' | 'ask'",
+        "count = 12"
+      ],
+      "returns": "inferred",
+      "tags": [
+        "test"
+      ],
+      "signature": "export function buildTradingLabDepth(lastPrice: number, side: 'bid' | 'ask', count = 12) {",
+      "docstring": ""
+    },
+    {
+      "name": "buildTradingLabPreview",
+      "qualname": "buildTradingLabPreview",
+      "kind": "function",
+      "file": "tests/fixtures/tradingLabFixtures.ts",
+      "line": 82,
+      "lineEnd": 247,
+      "exported": true,
+      "async": false,
+      "params": [
+        "settings: TerminalSettings"
+      ],
+      "returns": "inferred",
+      "tags": [
+        "test"
+      ],
+      "signature": "export function buildTradingLabPreview(settings: TerminalSettings) {",
       "docstring": ""
     },
     {
