@@ -35,6 +35,12 @@ jobs:
       # the assertion below can never pass.
       - run: npm run index:functions:check
       - run: npm run index:docs:check
+      # docs:check follows every link in every committed Markdown file,
+      # including Doc/README.md -> Doc/generated/APEX_COMPLETE_VISUAL_PROJECT_DOCUMENTATION.html.
+      # That file is gitignored and only exists once docs:visual has generated
+      # it (see ci.yml's verify job), so it must run here too or docs:check
+      # fails on a link that is valid on any checkout where docs:visual ran.
+      - run: npm run docs:visual
       - run: npm run docs:check
       - name: Fail if generated docs drifted from committed state
         run: |
