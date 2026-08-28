@@ -1,0 +1,25 @@
+name: Seed canonical base
+
+on:
+  push:
+    paths:
+      - '.github/workflows/seed-base.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror existing Apex main into canonical repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git clone --no-tags --single-branch --branch main https://github.com/nimazasinich/Apex.git source
+          cd source
+          git remote remove origin
+          git remote add target "https://x-access-token:${GH_TOKEN}@github.com/${TARGET_REPO}.git"
+          git push --force target main:main
