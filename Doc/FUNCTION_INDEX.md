@@ -13,8 +13,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 ## Summary
 
-- Total indexed symbols: 3819
-- Generated at: 2026-08-28T09:47:27.223Z
+- Total indexed symbols: 3820
+- Generated at: 2026-08-28T19:37:33.837Z
 
 ## Tag Index
 
@@ -27,7 +27,7 @@ Use this index before opening large files. Search by function name, tag, or file
 - `ml`: 196
 - `provider`: 106
 - `scanner`: 30
-- `script`: 828
+- `script`: 829
 - `server`: 80
 - `service`: 1912
 - `test`: 157
@@ -260,6 +260,12 @@ Use this index before opening large files. Search by function name, tag, or file
 | `hasPrefix` | function | 61-61 | no | no | `script` |
 | `assertNoForbidden` | function | 62-69 | no | no | `script` |
 | `runPolicySelfTest` | function | 71-100 | no | no | `script` |
+
+### scripts/gates/checkRootContract.mjs
+
+| Name | Kind | Line | Export | Async | Tags |
+|---|---|---:|---|---|---|
+| `secretLike` | arrow | 16-21 | no | no | `script` |
 
 ### scripts/gates/checkTestInventory.mjs
 

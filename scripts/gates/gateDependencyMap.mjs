@@ -69,6 +69,7 @@ export const BUILD_IDENTITY_INPUTS = [
 export const ALWAYS_RUN = new Set([
   'check:test-inventory',
   'check:root-contract',
+  'check:lockfile-platform',
   'check:api-contract',
   'check:build-identity',
   'release:gate',
@@ -216,6 +217,7 @@ export const VERIFY_FAST_CHAIN = [
   { gate: 'qa:strategy-studio-reference', run: { npm: 'qa:strategy-studio-reference' }, expensive: false, inputs: ['src/pages/**', 'public/assets/**', 'scripts/qa/verifyStrategyStudioReference.mjs'] },
   { gate: 'qa:strategy-page-modernization', run: { npm: 'qa:strategy-page-modernization' }, expensive: false, inputs: ['src/pages/**', 'scripts/qa/verifyStrategyPageModernization.mjs'] },
   { gate: 'check:root-contract', run: { npm: 'check:root-contract' }, expensive: false, inputs: ['*'], note: 'always-run: asserts the entire root listing is classified' },
+  { gate: 'check:lockfile-platform', run: { npm: 'check:lockfile-platform' }, expensive: false, inputs: ['*'], note: "always-run: reads package-lock.json only, asserts the win32/linux-gnu/linux-musl/darwin-x64/darwin-arm64 esbuild+rollup optional-dependency entries are present (guards against nimazasinich/Apex's c857d349 failure mode)" },
   { gate: 'check:api-contract', run: { npm: 'check:api-contract' }, expensive: false, inputs: ['*'], note: 'always-run: regenerates the route index from server.ts and compares' },
   { gate: 'check:build-identity', run: { npm: 'check:build-identity' }, expensive: false, inputs: ['*'], note: 'always-run: hashes BUILD_IDENTITY_INPUTS against public/build-info.json' },
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T09:47:27.199Z",
+  "generatedAt": "2026-08-28T19:37:33.817Z",
   "process": "Apex Function Atlas",
   "fileHashes": {
     "server.ts": "4a1829fbb3a096f5",
@@ -552,9 +552,9 @@
     "scripts/gates/checkCssArbitraryColors.mjs": "d3ab9496544acd4d",
     "scripts/gates/checkNoSecretsInRelease.mjs": "073c4581cb30086c",
     "scripts/gates/checkReleaseArtifacts.mjs": "4b0b668e03ad2b17",
-    "scripts/gates/checkRootContract.mjs": "786026389d7ba749",
+    "scripts/gates/checkRootContract.mjs": "11c62539d15a3545",
     "scripts/gates/checkTestInventory.mjs": "c6f548f3bad02bb1",
-    "scripts/gates/checkVersionIdentity.mjs": "b5de86af5b1a975d",
+    "scripts/gates/checkVersionIdentity.mjs": "04f7859816cbe58c",
     "scripts/gates/computeChangedScope.mjs": "9629d3d6af2d0f49",
     "scripts/gates/gateDependencyMap.mjs": "2358a71a93eb55cc",
     "scripts/gates/runAutopilotLifecycleRuntime.mjs": "eff4dab830620a4c",
@@ -2633,6 +2633,25 @@
         "script"
       ],
       "signature": "function runPolicySelfTest() {",
+      "docstring": ""
+    },
+    {
+      "name": "secretLike",
+      "qualname": "secretLike",
+      "kind": "arrow",
+      "file": "scripts/gates/checkRootContract.mjs",
+      "line": 16,
+      "lineEnd": 21,
+      "exported": false,
+      "async": false,
+      "params": [
+        "entry"
+      ],
+      "returns": "inferred",
+      "tags": [
+        "script"
+      ],
+      "signature": "(entry) =>",
       "docstring": ""
     },
     {
