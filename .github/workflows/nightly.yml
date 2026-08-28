@@ -5,6 +5,15 @@ name: Nightly checks
 # documentation drift gate against current main and a dependency-vulnerability
 # scan on a nightly cadence, independent of whether a PR happened to trigger
 # CI that day.
+#
+# C2 (APEX_CI_GATE_RATIONALIZATION_CONTINUATION_PROMPT.md): this doc-drift job
+# already lived here before that item was written. The actual bug C2 fixed was
+# a *second*, redundant copy of the same drift check that had also been
+# running inline in ci.yml's verify job on every PR -- so a PR whose diff never
+# touched Doc/FUNCTION_INDEX.* or Doc/DOCUMENTATION_INDEX.* could still be
+# blocked by drift some other, already-merged change introduced. That inline
+# copy has been removed from ci.yml; this job remains the sole place drift is
+# enforced.
 
 on:
   schedule:
@@ -66,3 +75,21 @@ jobs:
       # in §16A.2 item 6.
       - name: npm audit (production dependencies, high+ severity)
         run: npm audit --omit=dev --audit-level=high
+
+  sealed-holdout-evidence:
+    name: research:sealed:verify-evidence (real data, when this runner has it)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.x'
+          cache: 'npm'
+      - run: npm ci
+      # C4/C5: reports PASS / FAIL / NOT_EXECUTED_DATA_ABSENT (see
+      # scripts/gates/verifySealedHoldoutEvidence.mjs). Exits 0 for the first
+      # and third state -- this job is informational unless the data is
+      # present and the guard actually fails against it, since GitHub-hosted
+      # runners generally cannot reach Binance's API from a US IP either.
+      - name: research:sealed:verify-evidence
+        run: npm run research:sealed:verify-evidence

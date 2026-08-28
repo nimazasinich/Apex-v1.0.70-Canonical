@@ -1,11 +1,22 @@
 name: CI
 
 # Stage SEC (APEX_MASTER_IMPLEMENTATION_PLAN §16A.2). Runs the project's
-# `verify` tier structure (§4.4.3: lint -> unit -> runtime -> build -> QA
-# suites -> docs -> release gate) on every push/PR and blocks merge on
-# failure. A registry mirror 404 must be a red check here, not a silently
-# skipped step — see AUDIT_REPORT_v1.0.47 for why prior sessions could not
-# execute this at all.
+# `verify:pr` tier (§4.4.3: lint -> unit -> runtime -> build -> QA suites ->
+# docs -> release gate) on every push/PR and blocks merge on failure. A
+# registry mirror 404 must be a red check here, not a silently skipped step —
+# see AUDIT_REPORT_v1.0.47 for why prior sessions could not execute this at
+# all.
+#
+# Node matrix: package.json engines pins "node": ">=22 <25", so a 22.x check
+# stays meaningful. Node 24.x is the sole authoritative full verify:pr runner;
+# 22.x gets a narrow compatibility job (lint + test:unit only) instead of a
+# second full run of the entire non-visual pipeline, which cost roughly twice
+# the CI time for no evidence beyond the two cheapest gates ever differing by
+# Node minor version. Generated-docs-drift enforcement lives in
+# nightly.yml, not here — it's an assertion about the *committed* index
+# files, not about whatever this PR's diff actually touches, so it belongs on
+# a whole-repo cadence rather than blocking a PR that never came near
+# Doc/FUNCTION_INDEX.* or Doc/DOCUMENTATION_INDEX.*.
 
 on:
   push:
@@ -23,18 +34,14 @@ permissions:
 
 jobs:
   verify:
-    name: verify (lint + unit + runtime + build + QA + docs + release-gate)
+    name: verify:pr (lint + unit + runtime + build + QA + docs + release-gate)
     runs-on: windows-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node: ['22.x', '24.x']
     steps:
       - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v7
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '24.x'
           cache: 'npm'
 
       # A registry mirror outage must fail the build, not be swallowed.
@@ -44,57 +51,43 @@ jobs:
       # Keep dependency-backed source/unit/runtime/build/release evidence in
       # this job. Browser and visual gates belong exclusively to verify-visual
       # below, where Chromium is installed explicitly.
-      - name: verify (non-visual pipeline)
-        run: |
-          npm run lint
-          npm run check:test-inventory
-          npm run test:unit
-          npm run build
-          npm run test:runtime
-          npm run check:source-contracts
-          npm run docs:visual
-          npm run docs:check
-          npm run release:gate
+      - name: verify:pr (non-visual pipeline)
+        run: npm run verify:pr
 
       - name: npm audit (production dependencies, high+ severity)
-        if: matrix.node == '24.x'
         run: npm audit --omit=dev --audit-level=high
-
-      # Use the `:check` script aliases, which bake `--if-changed` into the
-      # script body. `npm run <script> -- --if-changed` does NOT forward the
-      # flag through npm on this platform, so the generators ran in
-      # unconditional mode and rewrote both indexes with a fresh wall-clock
-      # `generatedAt` on every run — which made the drift assertion below fail
-      # permanently, no matter what was committed.
-      - name: Regenerate generated documentation indexes
-        if: matrix.node == '24.x'
-        run: |
-          npm run index:functions:check
-          npm run index:docs:check
-          npm run docs:check
-
-      - name: Fail if generated docs drifted from committed state
-        if: matrix.node == '24.x'
-        shell: bash
-        run: |
-          git diff --exit-code -- \
-            Doc/FUNCTION_INDEX.md \
-            Doc/FUNCTION_INDEX.json \
-            Doc/DOCUMENTATION_INDEX.md \
-            Doc/DOCUMENTATION_INDEX.json || \
-            (echo "::error::Generated documentation has drifted from source. Regenerate and commit the indexes." && exit 1)
 
       - name: Upload function index / audit artifacts
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: apex-verify-artifacts-node-${{ matrix.node }}
+          name: apex-verify-artifacts-node-24.x
           path: |
             Doc/FUNCTION_INDEX.md
             Doc/FUNCTION_INDEX.json
             dist/server.cjs
           if-no-files-found: ignore
           retention-days: 14
+
+  compat-node22:
+    name: compat (lint + unit on Node 22.x, the floor of engines.node)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.x'
+          cache: 'npm'
+
+      - name: Install dependencies (npm ci)
+        run: npm ci
+
+      - name: lint
+        run: npm run lint
+
+      - name: test:unit
+        run: npm run test:unit
 
   dependency-review:
     name: dependency review (new vulnerable dependencies)
@@ -116,7 +109,7 @@ jobs:
           fail-on-severity: high
 
   verify-visual:
-    name: verify:visual (Playwright browser + 1368x753 screenshot QA)
+    name: verify:ui (Playwright browser + 1368x753 screenshot QA)
     runs-on: windows-latest
     needs: verify
     steps:
@@ -139,14 +132,8 @@ jobs:
       - name: Install JavaScript Playwright browsers
         run: npx playwright install --with-deps chromium
 
-      - name: Build (visual QA runs against the built app)
-        run: npm run build
-
-      - name: qa:ui-1368 (pinned 1368x753 screenshot/geometry QA)
-        run: npm run qa:ui-1368
-
-      - name: qa:workspace-runtime (workspace runtime browser QA)
-        run: npm run qa:workspace-runtime
+      - name: verify:ui (build + qa:ui-1368 + qa:workspace-runtime)
+        run: npm run verify:ui
 
       - name: Upload visual QA diff artifacts
         if: always()
@@ -159,3 +146,4 @@ jobs:
             **/*-actual.png
           if-no-files-found: ignore
           retention-days: 14
+
