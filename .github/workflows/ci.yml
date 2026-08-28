@@ -73,17 +73,6 @@ jobs:
           npm run index:docs:check
           npm run docs:check
 
-      # TEMP DIAGNOSTIC (remove once the drift cause is confirmed): surface the
-      # actual diff as annotations, since raw job logs aren't reachable for
-      # inspection otherwise.
-      - name: TEMP debug drift diff
-        if: matrix.node == '24.x'
-        shell: bash
-        run: |
-          git diff -- Doc/FUNCTION_INDEX.md Doc/FUNCTION_INDEX.json Doc/DOCUMENTATION_INDEX.md Doc/DOCUMENTATION_INDEX.json > /tmp/drift.diff || true
-          wc -l /tmp/drift.diff
-          head -c 60000 /tmp/drift.diff | while IFS= read -r line; do echo "::warning::$line"; done
-
       - name: Fail if generated docs drifted from committed state
         if: matrix.node == '24.x'
         shell: bash
@@ -138,23 +127,17 @@ jobs:
           node-version: '24.x'
           cache: 'npm'
 
-      - uses: actions/setup-python@v7
-        with:
-          python-version: '3.12'
-
       - name: Install dependencies (npm ci)
         run: npm ci
 
-      # qa:ui-1368 uses Python Playwright while qa:workspace-runtime uses the
-      # package-locked JavaScript Playwright. Install matching runtimes so both
-      # use the same Chromium revision and browser cache.
-      - name: Install Python and JavaScript Playwright browsers
-        shell: bash
-        run: |
-          playwright_version="$(node -p "require('./package-lock.json').packages['node_modules/playwright'].version")"
-          python -m pip install "playwright==${playwright_version}"
-          python -m playwright install --with-deps chromium
-          npx playwright install chromium
+      # Both qa:ui-1368 (scripts/qa/verifyUi1368.mjs) and qa:workspace-runtime
+      # (scripts/qa/verifyWorkspaceRuntime.mts) import the package-locked
+      # JavaScript `playwright` package only — neither shells out to Python.
+      # A Python interpreter + `pip install playwright` was previously
+      # installed here for a `capture_apex_1368.py` legacy fixture
+      # (`qa:ui-1368:legacy-fixture`) that this job does not run; removed.
+      - name: Install JavaScript Playwright browsers
+        run: npx playwright install --with-deps chromium
 
       - name: Build (visual QA runs against the built app)
         run: npm run build

@@ -4,7 +4,7 @@
  * A waiting worker activates only after an explicit user-approved message.
  */
 
-const APP_VERSION = '1.0.68';
+const APP_VERSION = '1.0.70';
 const BUILD_HASH = 'source';
 const CACHE_NAME = `apex-shell-v${APP_VERSION}-${BUILD_HASH}`;
 const SHELL_URLS = ['/', '/index.html', '/manifest.json', '/favicon.svg', '/pwa-192.png', '/pwa-512.png'];
