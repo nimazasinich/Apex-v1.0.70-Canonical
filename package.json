@@ -69,7 +69,7 @@
     "test:unit": "vitest run",
     "research:sealed:guard": "vitest run tests/research/walkForwardHarness.test.ts -t \"sealed holdout guard\"",
     "research:sealed:verify-evidence": "node scripts/gates/verifySealedHoldoutEvidence.mjs",
-    "test:runtime": "npm run qa:strategy-engines && npm run qa:backtest-runtime && npm run qa:adaptive-governor && npm run qa:trading-engine-utilities && npm run qa:strategy-library && npm run qa:strategy-integration && npm run qa:strategy-backtest-production && npm run qa:unified-safety-runtime && npm run qa:autopilot-lifecycle-runtime && npm run qa:comprehensive-simulation && npm run qa:supplemental-key-runtime && npm run qa:proxy-fetch-optional-deps && npm run qa:smart-backtesting-fixtures && npm run qa:smart-backtesting-runtime-hardening",
+    "test:runtime": "npm run qa:strategy-engines && npm run qa:backtest-runtime && npm run qa:adaptive-governor && npm run qa:trading-engine-utilities && npm run qa:strategy-library && npm run qa:strategy-integration && npm run qa:strategy-backtest-production && npm run qa:unified-safety-runtime && npm run qa:comprehensive-simulation && npm run qa:supplemental-key-runtime && npm run qa:proxy-fetch-optional-deps && npm run qa:smart-backtesting-fixtures && npm run qa:smart-backtesting-runtime-hardening",
     "test:browser": "npm run qa:workspace-runtime",
     "test:visual": "npm run qa:ui-1368",
     "check:version-identity": "node scripts/gates/checkVersionIdentity.mjs",

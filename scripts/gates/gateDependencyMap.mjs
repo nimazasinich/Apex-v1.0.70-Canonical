@@ -179,13 +179,6 @@ export const VERIFY_FAST_CHAIN = [
   { gate: 'qa:strategy-integration', run: { npm: 'qa:strategy-integration' }, expensive: true, inputs: ['src/**', 'vite.config.ts', 'package.json'], note: 'vitest run src/tests/strategyValidationRuntime.test.ts' },
   { gate: 'qa:strategy-backtest-production', run: { npm: 'qa:strategy-backtest-production' }, expensive: true, inputs: ['src/**', 'vite.config.ts', 'package.json'], note: 'vitest run src/tests/strategyBacktestProduction.test.ts' },
   { gate: 'qa:unified-safety-runtime', run: { npm: 'qa:unified-safety-runtime' }, expensive: true, inputs: ['src/services/**', 'src/contracts/**', 'scripts/qa/runUnifiedSafetyRuntime.mjs'] },
-  {
-    gate: 'qa:autopilot-lifecycle-runtime',
-    run: { npm: 'qa:autopilot-lifecycle-runtime' },
-    expensive: true,
-    inputs: ['server.ts', 'src/**', 'package.json', 'scripts/qa/runAutopilotLifecycleRuntime.mjs'],
-    note: 'boots the real server on the fixed port 4599 and waits out two 60s scheduler cycles; single most expensive child in the chain',
-  },
   { gate: 'qa:comprehensive-simulation', run: { npm: 'qa:comprehensive-simulation' }, expensive: true, inputs: ['src/**', 'package.json', 'scripts/qa/generateComprehensiveSimulationData.mjs', 'scripts/qa/runComprehensiveSimulationRuntime.mjs'] },
   { gate: 'qa:supplemental-key-runtime', run: { npm: 'qa:supplemental-key-runtime' }, expensive: true, inputs: ['src/services/**', 'scripts/qa/runSupplementalKeyRuntime.mjs'] },
   { gate: 'qa:proxy-fetch-optional-deps', run: { npm: 'qa:proxy-fetch-optional-deps' }, expensive: true, inputs: ['src/services/**', 'package.json', 'package-lock.json', 'scripts/qa/runProxyFetchOptionalDependencyRuntime.mjs'] },

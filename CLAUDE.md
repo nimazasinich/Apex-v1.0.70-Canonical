@@ -24,6 +24,19 @@ flag it explicitly rather than proceeding, whatever environment you're in. Build
 gates, CI YAML, and this file's process ritual are a different category (developer
 velocity), and are fair game to simplify.
 
+**Standing rule (added 2026-08-28): `qa:autopilot-lifecycle-runtime`
+(`scripts/qa/runAutopilotLifecycleRuntime.mjs`) must never be wired into any automated gate
+chain** — not `verify`, not `verify:pr`/`verify:nightly`/`verify:release`, not
+`VERIFY_FAST_CHAIN` in `scripts/gates/gateDependencyMap.mjs`, not any GitHub Actions workflow.
+It boots a real server and needs live network to KuCoin/Binance market data; GitHub-hosted
+runners and most sandboxed agent environments are on US-region IPs that both exchanges
+block/throttle, so it fails with `server_not_reachable` there regardless of source changes —
+the same "can't reach an exchange from a hosted runner" situation `verifySealedHoldoutEvidence.mjs`
+already documents for the sealed-holdout check. It stays available only as the standalone
+`npm run qa:autopilot-lifecycle-runtime`, to be run explicitly, by a human, on a machine with
+real exchange connectivity (see that script's own header comment). If you find a gate chain
+has picked it back up, remove it — don't add a workaround around it staying in.
+
 ## Agent operating rules for the Desktop Commander + Serena stack (added 2026-08-23, softened 2026-08-28)
 
 The below is what works well **when your session has `desktop-commander` and Serena
