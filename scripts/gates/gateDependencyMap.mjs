@@ -237,6 +237,10 @@ export const VERIFY_FAST_CHAIN = [
     note: 'qa:ui-1368 builds an inline vite production bundle from source, so every src path is an input',
   },
 
+  // ---- sealed holdout (research), Part C / C4+C5 -------------------------
+  { gate: 'research:sealed:guard', run: { npm: 'research:sealed:guard' }, expensive: false, inputs: ['scripts/research/lib/researchDataset.ts', 'tests/research/walkForwardHarness.test.ts'], note: 'boundary-logic assertions that need no local data; always cheap to run' },
+  { gate: 'research:sealed:verify-evidence', run: { npm: 'research:sealed:verify-evidence' }, expensive: false, inputs: ['scripts/research/lib/researchDataset.ts', 'tests/research/walkForwardHarness.test.ts', 'scripts/gates/verifySealedHoldoutEvidence.mjs'], note: 'reports PASS / FAIL / NOT_EXECUTED_DATA_ABSENT; the latter two both exit 0 so this never blocks a hosted runner that cannot reach Binance' },
+
   // ---- stage 9-11: docs + release gate -----------------------------------
   { gate: 'docs:visual', run: { npm: 'docs:visual' }, expensive: false, inputs: ['Doc/**', 'src/**', 'public/**', 'package.json', 'scripts/utilities/updateVisualProjectDocumentation.mjs'] },
   { gate: 'docs:check', run: { npm: 'docs:check' }, expensive: false, inputs: ['**/*.md', 'Doc/**', 'scripts/utilities/checkDocumentationLinks.mts'] },
