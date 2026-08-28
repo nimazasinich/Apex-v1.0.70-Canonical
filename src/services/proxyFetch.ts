@@ -259,6 +259,23 @@ function buildAttemptOrder(now: number): string[] {
   return [...proxies, 'direct'];
 }
 
+// Node's global `fetch` is backed by its own bundled copy of undici. Passing
+// a Dispatcher/interceptor stack built from the separately npm-installed
+// `undici` package (a different build, potentially a different internal
+// handler protocol) to Node's global fetch throws UND_ERR_INVALID_ARG
+// ("invalid onRequestStart method") the moment a route actually dispatches a
+// request through it -- confirmed by reproduction: identical Agent +
+// interceptors.dns() composition works when invoked via the standalone
+// undici module's own `fetch`, and fails only through the global one. Always
+// route dispatcher-bearing calls through the matching undici build's fetch;
+// fall back to the global fetch only when no dispatcher is in play (undici
+// not loadable, e.g. a genuinely dependency-light environment).
+function fetchImplFor(dispatcher: Dispatcher | undefined): typeof fetch {
+  if (!dispatcher) return fetch;
+  const undici = loadUndici();
+  return (undici?.fetch as typeof fetch | undefined) ?? fetch;
+}
+
 function dispatcherFor(route: string): Dispatcher | undefined {
   const undici = loadUndici();
   if (route === 'direct') {
@@ -694,7 +711,9 @@ async function smartFetchJsonRaw(
       break;
     }
     try {
-      const res = await fetch(url, {
+      const dispatcher = dispatcherFor(route);
+      const routeFetch = fetchImplFor(dispatcher);
+      const res = await routeFetch(url, {
         method,
         headers: {
           'User-Agent': 'APEX-Trading-Engine/1.0',
@@ -703,8 +722,8 @@ async function smartFetchJsonRaw(
         },
         body,
         signal: AbortSignal.timeout(routeBudget),
-        // @ts-ignore Node fetch accepts an Undici Dispatcher; undefined uses Node's default dispatcher.
-        dispatcher: dispatcherFor(route),
+        // @ts-ignore Node/undici fetch accepts an Undici Dispatcher; undefined uses the default dispatcher.
+        dispatcher,
       });
 
       if (res.ok) {
@@ -751,7 +770,9 @@ async function smartFetchJsonRaw(
           if (remainingBudget() < MIN_ROUTE_BUDGET_MS + retryDelayMs) break;
           await new Promise((r) => setTimeout(r, retryDelayMs));
           try {
-            const retryRes = await fetch(url, {
+            const retryDispatcher = dispatcherFor(route);
+            const retryFetch = fetchImplFor(retryDispatcher);
+            const retryRes = await retryFetch(url, {
               method,
               headers: {
                 'User-Agent': 'APEX-Trading-Engine/1.0',
@@ -762,8 +783,8 @@ async function smartFetchJsonRaw(
               signal: AbortSignal.timeout(
                 Math.max(MIN_ROUTE_BUDGET_MS, Math.min(routeBudget, remainingBudget())),
               ),
-              // @ts-ignore Node fetch accepts an Undici Dispatcher.
-              dispatcher: dispatcherFor(route),
+              // @ts-ignore Node/undici fetch accepts an Undici Dispatcher.
+              dispatcher: retryDispatcher,
             });
 
             if (retryRes.ok) {
