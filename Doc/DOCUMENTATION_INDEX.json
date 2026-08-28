@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-28T08:44:01.699Z",
+  "generatedAt": "2026-08-28T08:56:46.250Z",
   "root": "Doc",
   "count": 240,
   "categories": {
@@ -24,8 +24,8 @@
     "CLAUDE_UI_HANDOFF_20260816.md": "1a13866c447111a6dd960709df7b646e5b395012fa9371f22e3d09747e6f5907",
     "CLAUDE_agent_rules_IMPROVED.md": "78beb3fefe10b752e12a0eafa9fa4fcb6efb6107f76e31ad1a68fdad3b8f20cd",
     "CONSOLIDATION_MANIFEST.json": "6d78308db7917e5d2ab7c79bd3064625ada87ba36903b71d043c4916facbc7da",
-    "FUNCTION_INDEX.json": "f71b150c53293b0a8dca4ab7adf969fb5c8f3e8828671d88b26887f953581ca7",
-    "FUNCTION_INDEX.md": "f14b52d692bf4f4c5f6938d75f205c3277d47b6136419308a4e23f072de2781e",
+    "FUNCTION_INDEX.json": "b20d51311862470181064dd21d4da4c0d6b9652c8334b760d2b74ff2a3f62806",
+    "FUNCTION_INDEX.md": "88fe35b3d6defabbe90d2b11366a83ee8d8f5cc70b2d64bd19cc0d9aa155ccb6",
     "FUNCTION_INDEX_AUTOMATION.md": "661734fa2528078f1e2b02959983958bec81948d6c7fbc49ab5396a64bdc48c1",
     "PROJECT_README.md": "90d3b780e051a18d87cf483e5989a700eb8f70f300ff48b650526b031a1d502e",
     "README.md": "6fc3427212df252aa678e02c9b347e1b53a694ee4981b0fb302687fb537898b4",
@@ -1381,7 +1381,7 @@
       "format": "json",
       "title": "FUNCTION INDEX",
       "bytes": 2097892,
-      "updatedAt": "2026-08-28T08:43:59.455Z"
+      "updatedAt": "2026-08-28T08:56:45.659Z"
     },
     {
       "path": "FUNCTION_INDEX.md",
@@ -1389,7 +1389,7 @@
       "format": "md",
       "title": "APEX Function Atlas",
       "bytes": 336188,
-      "updatedAt": "2026-08-28T08:43:59.471Z"
+      "updatedAt": "2026-08-28T08:56:45.667Z"
     },
     {
       "path": "archive/legacy-deliverables-2026-08-09/APEX-autopilot-newsdata-20260809/DIFF_SUMMARY.md",
