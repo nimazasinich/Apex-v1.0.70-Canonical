@@ -158,6 +158,7 @@ export interface ShadowSupplementalEvidence {
 }
 
 export type ProviderHealthReasonCode =
+  | 'UNKNOWN'
   | 'HEALTHY'
   | 'NOT_CONFIGURED'
   | 'DISABLED'
@@ -176,7 +177,8 @@ export interface ProviderHealth {
   /** Explicit operator/runtime disablement, distinct from missing configuration. */
   isEnabled?: boolean;
   isHealthy: boolean;
-  lastCheckTime: number;
+  healthState?: 'UNKNOWN' | 'HEALTHY' | 'UNHEALTHY';
+  lastCheckTime: number | null;
   lastSuccessTime?: number;
   failureCount: number;
   rateLimitedUntil?: number; // ms timestamp

@@ -11,7 +11,7 @@ export const OPERATIONS_STATUS_SCHEMA_VERSION = 7;
 export const OPERATIONS_STATUS_STALE_MS = 45_000;
 
 export type ServiceAvailabilityStatus = 'READY' | 'DEGRADED' | 'UNAVAILABLE' | 'STALE';
-export type ProviderRowStatus = 'HEALTHY' | 'UNHEALTHY' | 'NOT_CONFIGURED' | 'DISABLED' | 'RATE_LIMITED';
+export type ProviderRowStatus = 'UNKNOWN' | 'HEALTHY' | 'UNHEALTHY' | 'NOT_CONFIGURED' | 'DISABLED' | 'RATE_LIMITED';
 export type DecisionMemorySyncStatus = 'SYNC_ENABLED' | 'LOCAL_ONLY' | 'UNAVAILABLE';
 export type DatasetBackupOpsStatus = 'SKIPPED' | 'SYNCED' | 'ERROR' | 'EMPTY' | 'UNAVAILABLE';
 export type ShadowMlTrainingStatus =
@@ -272,6 +272,7 @@ export function classifyProviderHealthReason(
   if (!item.isConfigured) return 'NOT_CONFIGURED';
   if (item.rateLimitedUntil && now < item.rateLimitedUntil) return 'RATE_LIMITED';
   if (item.reasonCode) return item.reasonCode;
+  if (item.healthState === 'UNKNOWN') return 'UNKNOWN';
   if (item.isHealthy) return 'HEALTHY';
 
   const reason = String(item.reason || '').toLowerCase();
@@ -289,6 +290,7 @@ export function normalizeProviderRow(item: ProviderHealth, now = Date.now()): Op
   if (reasonCode === 'DISABLED') status = 'DISABLED';
   else if (reasonCode === 'NOT_CONFIGURED') status = 'NOT_CONFIGURED';
   else if (reasonCode === 'RATE_LIMITED') status = 'RATE_LIMITED';
+  else if (reasonCode === 'UNKNOWN') status = 'UNKNOWN';
   else if (reasonCode === 'HEALTHY') status = 'HEALTHY';
   else status = 'UNHEALTHY';
 

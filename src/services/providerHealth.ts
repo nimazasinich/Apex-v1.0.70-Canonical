@@ -29,8 +29,9 @@ export class ProviderHealthTracker {
       name,
       category,
       isConfigured: false,
-      isHealthy: true,
-      lastCheckTime: Date.now(),
+      isHealthy: false,
+      healthState: 'UNKNOWN',
+      lastCheckTime: null,
       failureCount: 0,
     });
   }
@@ -54,6 +55,7 @@ export class ProviderHealthTracker {
       h.lastSuccessTime = Date.now();
       h.failureCount = 0;
       h.isHealthy = true;
+      h.healthState = 'HEALTHY';
       h.lastCheckTime = Date.now();
       h.rateLimitedUntil = undefined;
     }
@@ -73,8 +75,10 @@ export class ProviderHealthTracker {
         // Back off for 5 minutes after rate limit
         h.rateLimitedUntil = Date.now() + 5 * 60 * 1000;
         h.isHealthy = false;
+        h.healthState = 'UNHEALTHY';
       } else if (h.failureCount >= this.maxFailuresBeforeUnhealthy) {
         h.isHealthy = false;
+        h.healthState = 'UNHEALTHY';
       }
     }
   }
@@ -90,6 +94,7 @@ export class ProviderHealthTracker {
       h.rateLimitedUntil = undefined;
       h.failureCount = 0;
       h.isHealthy = true;
+      h.healthState = 'HEALTHY';
       return false;
     }
     return true;
@@ -158,8 +163,9 @@ export class ProviderHealthTracker {
   reset(): void {
     for (const h of this.health.values()) {
       h.failureCount = 0;
-      h.isHealthy = true;
-      h.lastCheckTime = Date.now();
+      h.isHealthy = false;
+      h.healthState = 'UNKNOWN';
+      h.lastCheckTime = null;
       h.rateLimitedUntil = undefined;
       h.reason = undefined;
     }
