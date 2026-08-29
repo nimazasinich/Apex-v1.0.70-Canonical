@@ -2,13 +2,18 @@
 
 <img src=".github/assets/hero-banner.svg" alt="APEX — Supervised Crypto-Futures Trading & Research Terminal" width="100%"/>
 
-<br/>
+<br/><br/>
 
-![Version](https://img.shields.io/badge/version-1.0.70-blue?style=flat-square)
+[![CI](https://img.shields.io/github/actions/workflow/status/nimazasinich/Apex-v1.0.70-Canonical/ci.yml?branch=main&style=flat-square&label=CI&color=55C94B)](.github/workflows/ci.yml)
+[![Nightly](https://img.shields.io/github/actions/workflow/status/nimazasinich/Apex-v1.0.70-Canonical/nightly.yml?branch=main&style=flat-square&label=nightly&color=18BBAA)](.github/workflows/nightly.yml)
+[![CodeQL](https://img.shields.io/github/actions/workflow/status/nimazasinich/Apex-v1.0.70-Canonical/codeql.yml?branch=main&style=flat-square&label=CodeQL&color=55C94B)](.github/workflows/codeql.yml)
+![Version](https://img.shields.io/badge/version-1.0.70-18BBAA?style=flat-square)
 ![Stack](https://img.shields.io/badge/stack-React%2019%20%2B%20Node.js%20%2B%20TypeScript-3178C6?style=flat-square)
-![Status](https://img.shields.io/badge/status-active%20development-orange?style=flat-square)
 ![Trading Mode](https://img.shields.io/badge/live%20execution-supervised%20only-critical?style=flat-square)
-![Data](https://img.shields.io/badge/market%20data-100%25%20real%2C%20zero%20synthetic-22c55e?style=flat-square)
+![Data](https://img.shields.io/badge/market%20data-100%25%20real%2C%20zero%20synthetic-A8E935?style=flat-square)
+
+[![Last Commit](https://img.shields.io/github/last-commit/nimazasinich/Apex-v1.0.70-Canonical?style=flat-square&color=55C94B)](https://github.com/nimazasinich/Apex-v1.0.70-Canonical/commits/main)
+[![Branches](https://img.shields.io/github/actions/workflow/status/nimazasinich/Apex-v1.0.70-Canonical/export-base.yml?branch=main&style=flat-square&label=export-base&color=18BBAA)](.github/workflows/export-base.yml)
 
 **A local-first control room for market research, strategy backtesting, and manually supervised order execution — built to make every decision explainable, and no live order fireable without a human in the loop.**
 
@@ -22,6 +27,7 @@
 - [What APEX Is *Not*](#what-apex-is-not)
 - [Under the Hood](#-under-the-hood)
 - [Data You Can Trust](#-data-you-can-trust)
+- [Roadmap](#-roadmap)
 - [Quick Start](#-quick-start)
 - [Requirements](#requirements)
 - [Safety & Network Posture](#safety--network-posture)
@@ -29,6 +35,7 @@
 - [Documentation](#-documentation)
 
 ---
+
 
 ## What APEX Is
 
@@ -122,6 +129,32 @@ flowchart TD
 
 ---
 
+## 🧭 Roadmap
+
+APEX ships a lot of intelligence infrastructure already — the honest status is that some of it is still finding its footing. Tracked here so progress is visible, not just claimed.
+
+**Shipped**
+- [x] Four-layer Liquidity Hunter edge-evaluation pipeline (macro → target → microstructure → shadow validation)
+- [x] Adaptive threshold governance and decision-memory logging
+- [x] Risk Governor as a hard gate on every live order
+- [x] Verified market-data fallback chain with explicit `live`/`degraded`/`stale`/`unavailable` states — zero synthetic data in production
+- [x] Walk-forward strategy validation harness against a sealed historical holdout (see [`tests/research/walkForwardHarness.test.ts`](tests/research/walkForwardHarness.test.ts))
+
+**In progress**
+- [ ] Get a candidate strategy past all three sealed-holdout gates (net return, profit factor, max drawdown) — closest candidate currently clears profit factor and trade-count but fails the drawdown cap
+- [ ] Wire the backtested advanced signal engine into the live scanner (currently backtest-only, not yet feeding live decisions)
+- [ ] Confirm the decision-memory feedback loop actually informs future threshold/edge scoring rather than logging outcomes write-only
+
+**Planned**
+- [ ] Broaden execution coverage beyond the current primary exchange
+- [ ] Move durable state off single-file JSON storage onto a proper embedded database
+- [ ] Outbound alerting for signals, fills, and risk events (Telegram integration exists but is minimal)
+- [ ] Full cross-platform CI (native dependency build currently verified reliably only on Windows)
+
+Track live progress in [GitHub Actions](../../actions) and [`Doc/DOCUMENTATION_INDEX.md`](Doc/DOCUMENTATION_INDEX.md).
+
+---
+
 ## 🚀 Quick Start
 
 ```bash
@@ -182,8 +215,11 @@ openapi/   REST API specification
 ## 📚 Documentation
 
 - [`Doc/PROJECT_README.md`](Doc/PROJECT_README.md) — full feature history and capability overview
-- [`openapi/`](openapi/) — REST API specification
-- [`QA/`](QA/) — current validation evidence
+- [`Doc/DOCUMENTATION_INDEX.md`](Doc/DOCUMENTATION_INDEX.md) — index of every doc in the repo
+- [`Doc/ACCOUNT_MODES.md`](Doc/ACCOUNT_MODES.md) — paper vs. supervised-live account modes
+- [`openapi/apex-api.v1.yaml`](openapi/apex-api.v1.yaml) — REST API specification
+- [`QA/liquidity-hunter-baseline/baseline.json`](QA/liquidity-hunter-baseline/baseline.json) — current validation evidence
+- [`.github/workflows/`](.github/workflows/) — CI, nightly, and release pipelines
 
 ---
 
