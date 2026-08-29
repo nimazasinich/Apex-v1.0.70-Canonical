@@ -13,8 +13,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 ## Summary
 
-- Total indexed symbols: 3822
-- Generated at: 2026-08-28T19:44:49.817Z
+- Total indexed symbols: 3820
+- Generated at: 2026-08-29T07:09:31.056Z
 
 ## Tag Index
 
@@ -23,14 +23,14 @@ Use this index before opening large files. Search by function name, tag, or file
 - `component`: 199
 - `decision-memory`: 155
 - `hook`: 9
-- `market-data`: 559
+- `market-data`: 560
 - `ml`: 196
 - `provider`: 106
 - `scanner`: 30
-- `script`: 831
+- `script`: 828
 - `server`: 80
 - `service`: 1912
-- `test`: 157
+- `test`: 158
 - `ui`: 352
 
 ## Functions By File
@@ -241,21 +241,15 @@ Use this index before opening large files. Search by function name, tag, or file
 | `collectFiles` | function | 46-61 | no | no | `script` |
 | `scanFile` | function | 63-82 | no | no | `script` |
 
-### scripts/gates/checkLockfilePlatformCoverage.mjs
-
-| Name | Kind | Line | Export | Async | Tags |
-|---|---|---:|---|---|---|
-| `fail` | function | 41-55 | no | no | `script` |
-
 ### scripts/gates/checkNoSecretsInRelease.mjs
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `forbiddenPath` | function | 17-22 | no | no | `script` |
-| `zipEntries` | function | 24-44 | no | no | `script` |
-| `walk` | function | 46-59 | no | no | `script` |
-| `latestSourceMtime` | function | 97-106 | no | no | `script` |
-| `readDirSafe` | function | 107-107 | no | no | `script` |
+| `forbiddenPath` | function | 18-23 | no | no | `script` |
+| `zipEntries` | function | 25-45 | no | no | `script` |
+| `walk` | function | 47-60 | no | no | `script` |
+| `latestSourceMtime` | function | 98-107 | no | no | `script` |
+| `readDirSafe` | function | 108-108 | no | no | `script` |
 
 ### scripts/gates/checkReleaseArtifacts.mjs
 
@@ -266,12 +260,6 @@ Use this index before opening large files. Search by function name, tag, or file
 | `hasPrefix` | function | 61-61 | no | no | `script` |
 | `assertNoForbidden` | function | 62-69 | no | no | `script` |
 | `runPolicySelfTest` | function | 71-100 | no | no | `script` |
-
-### scripts/gates/checkRootContract.mjs
-
-| Name | Kind | Line | Export | Async | Tags |
-|---|---|---:|---|---|---|
-| `secretLike` | arrow | 16-21 | no | no | `script` |
 
 ### scripts/gates/checkTestInventory.mjs
 
@@ -304,8 +292,8 @@ Use this index before opening large files. Search by function name, tag, or file
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `globToRegExp` | function | 276-302 | yes | no | `script` |
-| `matchesAny` | function | 305-310 | yes | no | `script` |
+| `globToRegExp` | function | 270-296 | yes | no | `script` |
+| `matchesAny` | function | 299-304 | yes | no | `script` |
 
 ### scripts/gates/runAutopilotLifecycleRuntime.mjs
 
@@ -333,12 +321,6 @@ Use this index before opening large files. Search by function name, tag, or file
 | `decide` | function | 106-124 | no | no | `script` |
 | `runGate` | function | 126-144 | no | no | `script` |
 | `main` | function | 146-241 | no | no | `script` |
-
-### scripts/gates/verifySealedHoldoutEvidence.mjs
-
-| Name | Kind | Line | Export | Async | Tags |
-|---|---|---:|---|---|---|
-| `report` | function | 44-48 | no | no | `script` |
 
 ### scripts/lib/captureServer.mts
 
@@ -1364,7 +1346,7 @@ Use this index before opening large files. Search by function name, tag, or file
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `runStep` | function | 59-82 | no | no | `script` |
+| `runStep` | function | 59-86 | no | no | `script` |
 
 ### scripts/utilities/checkDocumentationLinks.mts
 
@@ -4949,51 +4931,51 @@ Use this index before opening large files. Search by function name, tag, or file
 | `normalizeProxyUrl` | function | 56-64 | yes | no | `market-data`, `service` |
 | `normalizeSocksProxyUrl` | function | 67-73 | yes | no | `market-data`, `service` |
 | `isSocksProxyRoute` | function | 75-77 | yes | no | `market-data`, `service` |
-| `parseProxyPool` | function | 79-134 | no | no | `market-data`, `service` |
+| `parseProxyPool` | function | 79-145 | no | no | `market-data`, `service` |
 | `pushCsv` | arrow | 81-87 | no | no | `market-data`, `service` |
-| `directDnsLookup` | arrow | 144-160 | no | no | `market-data`, `service` |
-| `directDnsPick` | arrow | 162-166 | no | no | `market-data`, `service` |
-| `addressOf` | arrow | 164-164 | no | no | `market-data`, `service` |
-| `timeoutForRoute` | function | 176-180 | no | no | `market-data`, `service` |
-| `computeBackoffMs` | function | 194-197 | yes | no | `market-data`, `service` |
-| `getHealth` | function | 210-217 | no | no | `market-data`, `service` |
-| `isHealthy` | function | 219-222 | no | no | `market-data`, `service` |
-| `recordProxySuccess` | function | 224-229 | no | no | `market-data`, `service` |
-| `recordProxyFailure` | function | 231-236 | no | no | `market-data`, `service` |
-| `buildAttemptOrder` | function | 242-260 | no | no | `market-data`, `service` |
-| `dispatcherFor` | function | 262-300 | no | no | `market-data`, `service` |
-| `describeFetchError` | function | 303-311 | no | no | `market-data`, `service` |
-| `throttledWarn` | function | 318-325 | no | no | `market-data`, `service` |
-| `envNumber` | function | 337-341 | no | no | `market-data`, `service` |
-| `ttlForUrl` | function | 374-382 | no | no | `market-data`, `service` |
-| `inferPriority` | function | 384-390 | no | no | `market-data`, `service` |
-| `warningGroup` | function | 392-399 | no | no | `market-data`, `service` |
-| `circuitKeyFor` | function | 401-403 | no | no | `market-data`, `service` |
-| `isRetryableFailure` | function | 422-426 | no | no | `market-data`, `service` |
-| `getUsableCachedResult` | function | 428-436 | no | no | `market-data`, `service` |
-| `recordUpstreamSuccess` | function | 438-440 | no | no | `market-data`, `service` |
-| `recordUpstreamFailure` | function | 442-457 | no | no | `market-data`, `service` |
-| `isCircuitOpen` | function | 459-467 | no | no | `market-data`, `service` |
-| `priorityRank` | function | 482-484 | no | no | `market-data`, `service` |
-| `canRun` | function | 486-490 | no | no | `market-data`, `service` |
-| `queueCount` | function | 492-494 | no | no | `market-data`, `service` |
-| `queueTimeoutFor` | function | 496-503 | no | no | `market-data`, `service` |
-| `sortQueue` | function | 505-507 | no | no | `market-data`, `service` |
-| `drainQueue` | function | 509-518 | no | no | `market-data`, `service` |
-| `acquireSlot` | function | 520-553 | no | no | `market-data`, `service` |
-| `grant` | arrow | 522-526 | no | no | `market-data`, `service` |
-| `releaseSlot` | function | 555-559 | no | no | `market-data`, `service` |
-| `governorCacheKey` | function | 561-575 | no | no | `market-data`, `service` |
-| `cachePolicyFor` | function | 577-590 | no | no | `market-data`, `service` |
-| `getGovernorStats` | function | 592-619 | yes | no | `market-data`, `service` |
-| `clearGovernorCache` | function | 621-623 | yes | no | `market-data`, `service` |
-| `smartFetchJsonRaw` | function | 666-801 | no | yes | `market-data`, `service` |
-| `remainingBudget` | arrow | 688-688 | no | no | `market-data`, `service` |
-| `isDnsLike` | arrow | 744-747 | no | no | `market-data`, `service` |
-| `smartFetchJson` | function | 812-935 | yes | yes | `market-data`, `service` |
-| `pruneProxyState` | function | 939-954 | yes | no | `market-data`, `service` |
-| `describeUpstreamUnreachable` | function | 961-971 | yes | no | `market-data`, `service` |
-| `getProxyPoolInfo` | function | 973-986 | yes | no | `market-data`, `service` |
+| `directDnsLookup` | arrow | 155-171 | no | no | `market-data`, `service` |
+| `directDnsPick` | arrow | 173-177 | no | no | `market-data`, `service` |
+| `addressOf` | arrow | 175-175 | no | no | `market-data`, `service` |
+| `timeoutForRoute` | function | 187-191 | no | no | `market-data`, `service` |
+| `computeBackoffMs` | function | 205-208 | yes | no | `market-data`, `service` |
+| `getHealth` | function | 221-228 | no | no | `market-data`, `service` |
+| `isHealthy` | function | 230-233 | no | no | `market-data`, `service` |
+| `recordProxySuccess` | function | 235-240 | no | no | `market-data`, `service` |
+| `recordProxyFailure` | function | 242-247 | no | no | `market-data`, `service` |
+| `buildAttemptOrder` | function | 253-271 | no | no | `market-data`, `service` |
+| `dispatcherFor` | function | 273-291 | no | no | `market-data`, `service` |
+| `describeFetchError` | function | 294-302 | no | no | `market-data`, `service` |
+| `throttledWarn` | function | 309-316 | no | no | `market-data`, `service` |
+| `envNumber` | function | 328-332 | no | no | `market-data`, `service` |
+| `ttlForUrl` | function | 365-373 | no | no | `market-data`, `service` |
+| `inferPriority` | function | 375-381 | no | no | `market-data`, `service` |
+| `warningGroup` | function | 383-390 | no | no | `market-data`, `service` |
+| `circuitKeyFor` | function | 392-394 | no | no | `market-data`, `service` |
+| `isRetryableFailure` | function | 413-417 | no | no | `market-data`, `service` |
+| `getUsableCachedResult` | function | 419-427 | no | no | `market-data`, `service` |
+| `recordUpstreamSuccess` | function | 429-431 | no | no | `market-data`, `service` |
+| `recordUpstreamFailure` | function | 433-448 | no | no | `market-data`, `service` |
+| `isCircuitOpen` | function | 450-458 | no | no | `market-data`, `service` |
+| `priorityRank` | function | 473-475 | no | no | `market-data`, `service` |
+| `canRun` | function | 477-481 | no | no | `market-data`, `service` |
+| `queueCount` | function | 483-485 | no | no | `market-data`, `service` |
+| `queueTimeoutFor` | function | 487-494 | no | no | `market-data`, `service` |
+| `sortQueue` | function | 496-498 | no | no | `market-data`, `service` |
+| `drainQueue` | function | 500-509 | no | no | `market-data`, `service` |
+| `acquireSlot` | function | 511-544 | no | no | `market-data`, `service` |
+| `grant` | arrow | 513-517 | no | no | `market-data`, `service` |
+| `releaseSlot` | function | 546-550 | no | no | `market-data`, `service` |
+| `governorCacheKey` | function | 552-566 | no | no | `market-data`, `service` |
+| `cachePolicyFor` | function | 568-581 | no | no | `market-data`, `service` |
+| `getGovernorStats` | function | 583-610 | yes | no | `market-data`, `service` |
+| `clearGovernorCache` | function | 612-614 | yes | no | `market-data`, `service` |
+| `smartFetchJsonRaw` | function | 657-793 | no | yes | `market-data`, `service` |
+| `remainingBudget` | arrow | 679-679 | no | no | `market-data`, `service` |
+| `isDnsLike` | arrow | 736-739 | no | no | `market-data`, `service` |
+| `smartFetchJson` | function | 804-927 | yes | yes | `market-data`, `service` |
+| `pruneProxyState` | function | 931-946 | yes | no | `market-data`, `service` |
+| `describeUpstreamUnreachable` | function | 953-963 | yes | no | `market-data`, `service` |
+| `getProxyPoolInfo` | function | 965-978 | yes | no | `market-data`, `service` |
 
 ### src/services/readPlane/liquidityHunterViewModel.ts
 
@@ -6204,14 +6186,14 @@ Use this index before opening large files. Search by function name, tag, or file
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `gateData` | function | 30-32 | yes | no | `service` |
-| `gateSample` | function | 34-36 | yes | no | `service` |
-| `gateOutOfSample` | function | 38-40 | yes | no | `service` |
-| `gateDrawdown` | function | 42-44 | yes | no | `service` |
-| `gateStability` | function | 46-51 | yes | no | `service` |
-| `gateCostResilience` | function | 53-55 | yes | no | `service` |
-| `gateRegime` | function | 57-71 | yes | no | `service` |
-| `buildStrategyValidationReport` | function | 73-115 | yes | no | `service` |
+| `gateData` | function | 32-34 | yes | no | `service` |
+| `gateSample` | function | 36-38 | yes | no | `service` |
+| `gateOutOfSample` | function | 40-42 | yes | no | `service` |
+| `gateDrawdown` | function | 44-46 | yes | no | `service` |
+| `gateStability` | function | 48-53 | yes | no | `service` |
+| `gateCostResilience` | function | 55-57 | yes | no | `service` |
+| `gateRegime` | function | 59-74 | yes | no | `service` |
+| `buildStrategyValidationReport` | function | 76-118 | yes | no | `service` |
 
 ### src/services/strategyValidationSubject.ts
 
@@ -6706,6 +6688,12 @@ Use this index before opening large files. Search by function name, tag, or file
 |---|---|---:|---|---|---|
 | `sequence` | function | 12-15 | no | no | `market-data`, `test` |
 | `fetchJson` | arrow | 54-57 | no | yes | `market-data`, `test` |
+
+### src/tests/proxyPoolDirectDefault.test.ts
+
+| Name | Kind | Line | Export | Async | Tags |
+|---|---|---:|---|---|---|
+| `loadPoolInfo` | function | 56-60 | no | yes | `market-data`, `test` |
 
 ### src/tests/regimeRoutedComposite.test.ts
 

@@ -110,14 +110,25 @@ function parseProxyPool(): string[] {
     candidates.push(`http://127.0.0.1:${localPort}`);
   }
 
-  // Release archives intentionally do not ship a populated .env. Windows APEX
-  // setups commonly expose either SOCKS5 or HTTP CONNECT on loopback port
-  // 10808, so recover both safe local-only routes automatically. Operators can
-  // still select one scheme through APEX_AUTO_LOCAL_PROXY_SCHEME. Missing
-  // listeners fail locally and the direct route remains available; no remote
-  // proxy, credential, or provider secret is embedded in the release.
+  // Release archives intentionally do not ship a populated .env. Some Windows
+  // APEX setups expose SOCKS5 or HTTP CONNECT on loopback port 10808, and this
+  // block recovers those local-only routes — but it is OPT-IN.
+  //
+  // It used to be opt-out (on unless APEX_AUTO_LOCAL_PROXY=false). On a host
+  // with no such listener that injected two dead loopback routes ahead of
+  // 'direct' (see buildAttemptOrder), so every market-data call paid failed
+  // proxy attempts before reaching a working direct route. Verified on the
+  // target VPS: no listener on 10808, and direct HTTPS to all market-data
+  // hosts succeeds in 203-540 ms. Defaulting to direct is therefore correct
+  // for an unconfigured host.
+  //
+  // Operators who do run a loopback tunnel opt in with APEX_AUTO_LOCAL_PROXY=true
+  // (port via APEX_AUTO_LOCAL_PROXY_PORT, scheme via APEX_AUTO_LOCAL_PROXY_SCHEME),
+  // or configure an explicit proxy through SOCKS5_PROXY / HTTPS_PROXY / etc.
+  // Ordering remains controlled by PROXY_MODE. No remote proxy, credential, or
+  // provider secret is embedded in the release.
   const hasExplicitProxy = candidates.length > 0;
-  if (!hasExplicitProxy && process.env.APEX_AUTO_LOCAL_PROXY !== 'false') {
+  if (!hasExplicitProxy && process.env.APEX_AUTO_LOCAL_PROXY === 'true') {
     const autoPort = (process.env.APEX_AUTO_LOCAL_PROXY_PORT || '10808').trim();
     const autoScheme = (process.env.APEX_AUTO_LOCAL_PROXY_SCHEME || 'both').trim().toLowerCase();
     if (/^\d+$/.test(autoPort)) {
@@ -277,30 +288,10 @@ function fetchImplFor(dispatcher: Dispatcher | undefined): typeof fetch {
 }
 
 function dispatcherFor(route: string): Dispatcher | undefined {
-  const undici = loadUndici();
   if (route === 'direct') {
-    // Node 22 provides a standards-compliant global fetch. When the optional
-    // locked `undici` dependency has not been installed yet, fall back to that
-    // direct dispatcher instead of making dependency-light QA and read-only
-    // runtimes fail at import time. Installed production builds still use the
-    // DNS-pinning Undici dispatcher below.
-    if (!undici?.Agent || !undici?.interceptors?.dns) return undefined;
-    let d = dispatcherCache.get('direct');
-    if (!d) {
-      d = new undici.Agent({
-        connect: { timeout: 10_000 },
-      }).compose([
-        undici.interceptors.dns({
-          affinity: 4,
-          dualStack: false,
-          lookup: directDnsLookup,
-          pick: directDnsPick,
-        }),
-      ]);
-      dispatcherCache.set('direct', d);
-    }
-    return d;
+    return undefined;
   }
+  const undici = loadUndici();
   let d = dispatcherCache.get(route);
   if (!d) {
     if (isSocksProxyRoute(route)) {
@@ -710,6 +701,7 @@ async function smartFetchJsonRaw(
       last = { ...last, error: last.error === 'no_route' ? 'budget_exhausted' : last.error };
       break;
     }
+    const dispatcher = dispatcherFor(route);
     try {
       const dispatcher = dispatcherFor(route);
       const routeFetch = fetchImplFor(dispatcher);
@@ -723,7 +715,7 @@ async function smartFetchJsonRaw(
         body,
         signal: AbortSignal.timeout(routeBudget),
         // @ts-ignore Node/undici fetch accepts an Undici Dispatcher; undefined uses the default dispatcher.
-        dispatcher,
+        ...(dispatcher ? { dispatcher } : {}),
       });
 
       if (res.ok) {
@@ -784,7 +776,7 @@ async function smartFetchJsonRaw(
                 Math.max(MIN_ROUTE_BUDGET_MS, Math.min(routeBudget, remainingBudget())),
               ),
               // @ts-ignore Node/undici fetch accepts an Undici Dispatcher.
-              dispatcher: retryDispatcher,
+              ...(retryDispatcher ? { dispatcher: retryDispatcher } : {}),
             });
 
             if (retryRes.ok) {
@@ -1005,3 +997,4 @@ export function getProxyPoolInfo(): {
     maxConcurrency: GOVERNOR_MAX_CONCURRENCY,
   };
 }
+

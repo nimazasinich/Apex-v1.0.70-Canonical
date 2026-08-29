@@ -27,16 +27,18 @@ export interface ValidationInputs {
   validationLimitations?: string[];
 }
 
+export const MIN_REQUIRED_TRADES = 30;
+
 export function gateData(result: BacktestResult): boolean {
-  return result.dataState !== 'unavailable' && result.candlesUsed >= 200;
+  return result.dataState === 'live' && result.candlesUsed >= 200;
 }
 
 export function gateSample(result: BacktestResult): boolean {
-  return result.timeline.length >= 30;
+  return result.timeline.length >= MIN_REQUIRED_TRADES;
 }
 
 export function gateOutOfSample(result: BacktestResult): boolean {
-  return result.totalPnlPct > 0 && (result.profitFactor ?? 0) >= 1;
+  return result.totalPnlPct > 0 && (result.profitFactor ?? 0) >= 1.1;
 }
 
 export function gateDrawdown(result: BacktestResult, limitPct = 20): boolean {
@@ -51,7 +53,7 @@ export function gateStability(neighborRuns: Array<{ totalPnlPct: number }>, hold
 }
 
 export function gateCostResilience(result: BacktestResult): boolean {
-  return result.totalPnlPct > 0 && (result.profitFactor ?? 0) >= 1;
+  return result.totalPnlPct > 0 && (result.profitFactor ?? 0) >= 1.1;
 }
 
 export function gateRegime(regimeResults?: Record<string, BacktestResult>): boolean {
@@ -67,7 +69,8 @@ export function gateRegime(regimeResults?: Record<string, BacktestResult>): bool
     timeline: result.timeline.map((trade) => [trade.timestamp, trade.entry, trade.exit, trade.barsHeld]),
   }));
   if (new Set(identities).size !== identities.length) return false;
-  return entries.some((result) => result.totalPnlPct > 0) && entries.every((result) => Math.abs(result.maxDrawdownPct) <= 30);
+  const profitableCount = entries.filter((result) => result.totalPnlPct > 0).length;
+  return profitableCount >= 2 && entries.every((result) => Math.abs(result.maxDrawdownPct) <= 30);
 }
 
 export function buildStrategyValidationReport(inputs: ValidationInputs): StrategyValidationReport {
