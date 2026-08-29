@@ -1,0 +1,84 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="50%" stop-color="#0d1220"/>
+      <stop offset="100%" stop-color="#0a0e1a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a1a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ff7a1a" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="glowBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c7d2e0"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#1a2540" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#0a0e1a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="320" fill="url(#bg)"/>
+  <rect width="1200" height="320" fill="url(#vignette)"/>
+
+  <!-- faint grid -->
+  <g stroke="#1e2a44" stroke-width="1" opacity="0.5">
+    <line x1="0" y1="60" x2="1200" y2="60"/>
+    <line x1="0" y1="120" x2="1200" y2="120"/>
+    <line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/>
+    <line x1="100" y1="0" x2="100" y2="320"/>
+    <line x1="300" y1="0" x2="300" y2="320"/>
+    <line x1="500" y1="0" x2="500" y2="320"/>
+    <line x1="700" y1="0" x2="700" y2="320"/>
+    <line x1="900" y1="0" x2="900" y2="320"/>
+    <line x1="1100" y1="0" x2="1100" y2="320"/>
+  </g>
+
+  <!-- candlestick silhouette, back layer -->
+  <g opacity="0.5">
+    <line x1="60" y1="210" x2="60" y2="260" stroke="#2a3a5c" stroke-width="2"/>
+    <rect x="52" y="225" width="16" height="24" fill="#2a3a5c"/>
+    <line x1="95" y1="190" x2="95" y2="240" stroke="#2a3a5c" stroke-width="2"/>
+    <rect x="87" y="200" width="16" height="28" fill="#3a4d78"/>
+    <line x1="130" y1="230" x2="130" y2="275" stroke="#2a3a5c" stroke-width="2"/>
+    <rect x="122" y="240" width="16" height="22" fill="#2a3a5c"/>
+    <line x1="1105" y1="70" x2="1105" y2="130" stroke="#2a3a5c" stroke-width="2"/>
+    <rect x="1097" y="80" width="16" height="30" fill="#3a4d78"/>
+    <line x1="1140" y1="90" x2="1140" y2="150" stroke="#2a3a5c" stroke-width="2"/>
+    <rect x="1132" y="100" width="16" height="26" fill="#2a3a5c"/>
+  </g>
+
+  <!-- rising price line (orange) -->
+  <polyline points="0,255 90,235 180,245 270,190 360,205 450,150 540,165 630,120 720,135 810,95 900,110 990,70 1080,85 1200,55"
+    fill="none" stroke="url(#glow)" stroke-width="3.5" opacity="0.9"/>
+
+  <!-- secondary line (blue) -->
+  <polyline points="0,275 90,270 180,260 270,255 360,240 450,235 540,220 630,215 720,200 810,195 900,180 990,175 1080,160 1200,150"
+    fill="none" stroke="url(#glowBlue)" stroke-width="2.5" opacity="0.6"/>
+
+  <!-- wordmark -->
+  <text x="90" y="150" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="800" letter-spacing="4" fill="url(#textGrad)">APEX</text>
+
+  <!-- accent underline -->
+  <rect x="92" y="168" width="270" height="5" rx="2.5" fill="#ff7a1a"/>
+
+  <!-- tagline -->
+  <text x="92" y="205" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="500" fill="#9fb0cc">Supervised Crypto-Futures Trading &amp; Research Terminal</text>
+
+  <!-- small status chips -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="600">
+    <rect x="92" y="225" width="150" height="30" rx="15" fill="#12203a" stroke="#2a3a5c"/>
+    <circle cx="110" cy="240" r="4" fill="#22c55e"/>
+    <text x="122" y="245" fill="#c7d2e0">Live Market Data</text>
+
+    <rect x="252" y="225" width="185" height="30" rx="15" fill="#12203a" stroke="#2a3a5c"/>
+    <circle cx="270" cy="240" r="4" fill="#ff7a1a"/>
+    <text x="282" y="245" fill="#c7d2e0">Human-Approved Orders</text>
+  </g>
+</svg>
