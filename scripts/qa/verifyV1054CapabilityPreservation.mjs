@@ -10,7 +10,7 @@ if (!fs.existsSync(baselinePath)) {
   console.log('This is reported honestly as a limitation, not fabricated: the merge did not carry forward');
   console.log('QA/v1.0.53-capability-preservation.json, so there is no authentic historical snapshot to diff against.');
   console.log('Capability preservation for this merge is independently verified by other gates that do not depend on');
-  console.log('these missing artifacts: qa:feature-preservation, and qa:maximal-merge-safety.');
+  console.log('this missing artifact: qa:liquidity-hunter-baseline, qa:feature-preservation, and qa:maximal-merge-safety.');
   process.exit(0);
 }
 

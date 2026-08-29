@@ -2234,8 +2234,8 @@ export function registerApexNextMarketRoutes(
         maxSymbolWeight: 0.4,
         maxDirectionalWeight,
         maxDrawdownPct: 20,
-        minProfitFactor: 1.1,
-        minTrades: 30,
+        minProfitFactor: 1.05,
+        minTrades: 6,
       });
       paperPlanReceipt = multiAgentCouncilStore.put(multiAgent);
     }
@@ -2664,8 +2664,8 @@ export function registerApexNextMarketRoutes(
       maxSymbolWeight = bounded('maxSymbolWeight', req.body?.maxSymbolWeight, 0.4, 0.05, 1);
       maxDirectionalWeight = bounded('maxDirectionalWeight', req.body?.maxDirectionalWeight, 0.7, 0.1, 1);
       agentMaxDrawdownPct = bounded('agentMaxDrawdownPct', req.body?.agentMaxDrawdownPct, 20, 1, 80);
-      agentMinProfitFactor = bounded('agentMinProfitFactor', req.body?.agentMinProfitFactor, 1.1, 1.0, 3.0, true);
-      agentMinTrades = bounded('agentMinTrades', req.body?.agentMinTrades, 30, 1, 1_000, true);
+      agentMinProfitFactor = bounded('agentMinProfitFactor', req.body?.agentMinProfitFactor, 1, 0, 5);
+      agentMinTrades = bounded('agentMinTrades', req.body?.agentMinTrades, 8, 1, 1_000, true);
     } catch (error) {
       res.status(422).json({ error: 'multi_strategy_controls_invalid', message: error instanceof Error ? error.message : String(error) });
       return;

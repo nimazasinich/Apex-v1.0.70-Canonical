@@ -24,11 +24,7 @@ const routeModules = exists(routeModulesDir)
   : '';
 const governance = read('src/services/adaptiveThresholdGovernance.ts');
 const baselinePath = 'QA/liquidity-hunter-baseline/baseline.json';
-if (!exists(baselinePath)) {
-  console.log('SKIP liquidity-hunter-baseline: baseline artifact legitimately absent on clean clone (QA/ is git-ignored).');
-  process.exit(0);
-}
-const baseline = JSON.parse(read(baselinePath));
+const baseline = exists(baselinePath) ? JSON.parse(read(baselinePath)) : null;
 
 const strategyIds = [...registry.matchAll(/strategyId:\s*'([^']+)'/g)].map((match) => match[1]);
 const defaultStrategyMatch = registry.match(/DEFAULT_STRATEGY_ID\s*=\s*'([^']+)'/);
@@ -38,7 +34,7 @@ const preservedStrategyIds = baseline?.strategyRegistry?.strategies?.map((item) 
 const preservedRouteLiterals = baseline?.apiRoutes?.routes ?? [];
 const preservedScriptNames = Object.keys(baseline?.packageScripts?.scripts ?? {});
 const checks = [
-  ['baseline preservation manifest exists', true],
+  ['baseline preservation manifest exists', Boolean(baseline)],
   ['all snapshotted strategy identities remain registered', preservedStrategyIds.length > 0 && preservedStrategyIds.every((id) => uniqueStrategyIds.includes(id))],
   ['all snapshotted API route literals remain present', preservedRouteLiterals.length > 0 && preservedRouteLiterals.every((route) => currentRouteText.includes(route))],
   ['all snapshotted package scripts remain present', preservedScriptNames.length > 0 && preservedScriptNames.every((name) => typeof pkg.scripts?.[name] === 'string')],

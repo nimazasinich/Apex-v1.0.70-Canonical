@@ -43,7 +43,6 @@ export function hasBoundEvidence(strategy: StrategyDefinition): boolean {
 
 export function strategyDisplayStatus(strategy: StrategyDefinition): StrategyDisplayStatus {
   if (strategy.status === 'blocked') return 'Blocked';
-  if (hasBoundEvidence(strategy) && strategy.latestSnapshot?.dataState !== 'live') return 'Evidence Pending';
   if (strategy.status === 'validated' && hasBoundEvidence(strategy) && strategy.latestSnapshot?.dataState === 'live') return 'Verified';
   if (strategy.status === 'validated') return 'Evidence Pending';
   if (strategy.wave !== 'wave1-mvp') return 'Research Preview';

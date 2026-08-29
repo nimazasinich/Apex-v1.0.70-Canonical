@@ -69,7 +69,7 @@ export function OverviewStatusCards({
   const configured = opsSummary.configuredProviders;
   cards.push({
     key: 'providers',
-    label: 'Supplemental Health',
+    label: 'Provider Health',
     value: healthy != null && configured != null ? `${healthy} / ${configured} OK` : '—',
     tone: healthy != null && configured != null && healthy >= configured ? 'ok' : healthy != null && healthy > 0 ? 'warn' : 'muted',
     icon: Server,

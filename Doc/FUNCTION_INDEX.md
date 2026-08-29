@@ -14,7 +14,7 @@ Use this index before opening large files. Search by function name, tag, or file
 ## Summary
 
 - Total indexed symbols: 3820
-- Generated at: 2026-08-29T06:42:46.323Z
+- Generated at: 2026-08-29T07:09:31.056Z
 
 ## Tag Index
 
@@ -3351,12 +3351,12 @@ Use this index before opening large files. Search by function name, tag, or file
 |---|---|---:|---|---|---|
 | `strategyDataTier` | function | 6-13 | yes | no |  |
 | `hasBoundEvidence` | function | 15-42 | yes | no |  |
-| `strategyDisplayStatus` | function | 44-51 | yes | no |  |
-| `supportedDirections` | function | 53-55 | yes | no |  |
-| `formatEvidenceDate` | function | 57-59 | yes | no |  |
-| `evidenceWarnings` | function | 61-69 | yes | no |  |
-| `evidenceComparable` | function | 71-93 | yes | no |  |
-| `intervalLabel` | function | 95-97 | yes | no |  |
+| `strategyDisplayStatus` | function | 44-50 | yes | no |  |
+| `supportedDirections` | function | 52-54 | yes | no |  |
+| `formatEvidenceDate` | function | 56-58 | yes | no |  |
+| `evidenceWarnings` | function | 60-68 | yes | no |  |
+| `evidenceComparable` | function | 70-92 | yes | no |  |
+| `intervalLabel` | function | 94-96 | yes | no |  |
 
 ### src/pages/strategies/StrategyWorkflowStepper.tsx
 
@@ -4648,26 +4648,26 @@ Use this index before opening large files. Search by function name, tag, or file
 |---|---|---:|---|---|---|
 | `isSecretLikeField` | function | 243-245 | yes | no | `service` |
 | `assertNoSecretFields` | function | 247-265 | yes | no | `service` |
-| `classifyProviderHealthReason` | function | 267-285 | yes | no | `market-data`, `service` |
-| `normalizeProviderRow` | function | 287-310 | yes | no | `market-data`, `service` |
-| `summarizeProviders` | function | 312-331 | yes | no | `market-data`, `service` |
-| `readJsonReport` | function | 333-348 | no | no | `service` |
-| `asString` | function | 350-352 | no | no | `service` |
-| `asNumber` | function | 354-356 | no | no | `service` |
-| `parseAdaptiveStress` | function | 358-413 | no | no | `adaptive`, `service` |
-| `parseProviderRoutingStress` | function | 415-488 | no | no | `market-data`, `service` |
-| `emptyLoadMatrixReport` | function | 490-504 | no | no | `service` |
-| `parseLoadMatrixSummary` | function | 506-547 | no | no | `service` |
-| `aggregateLoadMatrixStatus` | function | 549-566 | no | no | `service` |
-| `parseShadowMlTraining` | function | 568-621 | no | no | `ml`, `service` |
-| `parseShadowMlComparison` | function | 623-695 | no | no | `ml`, `service` |
-| `deriveServiceStatus` | function | 697-765 | yes | no | `service` |
-| `defaultLiquidityHunterOperationsSection` | function | 767-867 | no | no | `service` |
-| `buildOperationsStatus` | function | 869-981 | yes | no | `service` |
-| `createUnavailableOperationsStatus` | function | 983-1084 | yes | no | `service` |
-| `isOperationsStatusStale` | function | 1086-1094 | yes | no | `service` |
-| `withClientStaleState` | function | 1096-1112 | yes | no | `service` |
-| `isValidOperationsStatusContract` | function | 1114-1129 | yes | no | `service` |
+| `classifyProviderHealthReason` | function | 267-284 | yes | no | `market-data`, `service` |
+| `normalizeProviderRow` | function | 286-308 | yes | no | `market-data`, `service` |
+| `summarizeProviders` | function | 310-329 | yes | no | `market-data`, `service` |
+| `readJsonReport` | function | 331-346 | no | no | `service` |
+| `asString` | function | 348-350 | no | no | `service` |
+| `asNumber` | function | 352-354 | no | no | `service` |
+| `parseAdaptiveStress` | function | 356-411 | no | no | `adaptive`, `service` |
+| `parseProviderRoutingStress` | function | 413-486 | no | no | `market-data`, `service` |
+| `emptyLoadMatrixReport` | function | 488-502 | no | no | `service` |
+| `parseLoadMatrixSummary` | function | 504-545 | no | no | `service` |
+| `aggregateLoadMatrixStatus` | function | 547-564 | no | no | `service` |
+| `parseShadowMlTraining` | function | 566-619 | no | no | `ml`, `service` |
+| `parseShadowMlComparison` | function | 621-693 | no | no | `ml`, `service` |
+| `deriveServiceStatus` | function | 695-763 | yes | no | `service` |
+| `defaultLiquidityHunterOperationsSection` | function | 765-865 | no | no | `service` |
+| `buildOperationsStatus` | function | 867-979 | yes | no | `service` |
+| `createUnavailableOperationsStatus` | function | 981-1082 | yes | no | `service` |
+| `isOperationsStatusStale` | function | 1084-1092 | yes | no | `service` |
+| `withClientStaleState` | function | 1094-1110 | yes | no | `service` |
+| `isValidOperationsStatusContract` | function | 1112-1127 | yes | no | `service` |
 
 ### src/services/orderErrorMessages.ts
 
@@ -4722,18 +4722,18 @@ Use this index before opening large files. Search by function name, tag, or file
 
 | Name | Kind | Line | Export | Async | Tags |
 |---|---|---:|---|---|---|
-| `ProviderHealthTracker` | class | 10-173 | yes | no | `market-data`, `service` |
-| `ProviderHealthTracker._initializeProvider` | method | 27-37 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.markConfigured` | method | 42-47 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.recordSuccess` | method | 52-62 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.recordFailure` | method | 67-84 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.isRateLimited` | method | 89-101 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.getHealth` | method | 106-108 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.getAllHealth` | method | 113-115 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.getHealthByCategory` | method | 120-122 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.getSummary` | method | 127-158 | no | no | `market-data`, `service` |
-| `ProviderHealthTracker.reset` | method | 163-172 | no | no | `market-data`, `service` |
-| `getProviderHealthTracker` | function | 180-185 | yes | no | `market-data`, `service` |
+| `ProviderHealthTracker` | class | 10-167 | yes | no | `market-data`, `service` |
+| `ProviderHealthTracker._initializeProvider` | method | 27-36 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.markConfigured` | method | 41-46 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.recordSuccess` | method | 51-60 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.recordFailure` | method | 65-80 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.isRateLimited` | method | 85-96 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.getHealth` | method | 101-103 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.getAllHealth` | method | 108-110 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.getHealthByCategory` | method | 115-117 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.getSummary` | method | 122-153 | no | no | `market-data`, `service` |
+| `ProviderHealthTracker.reset` | method | 158-166 | no | no | `market-data`, `service` |
+| `getProviderHealthTracker` | function | 174-179 | yes | no | `market-data`, `service` |
 
 ### src/services/providerRouter.ts
 

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx scripts/utilities/devWithFunctionIndex.mts",
     "dev:server": "tsx server.ts",
-    "build": "tsx scripts/utilities/buildAndBundle.mts && node scripts/gates/checkNoSecretsInRelease.mjs",
+    "build": "tsx scripts/utilities/buildAndBundle.mts",
     "start": "node dist/server.cjs",
     "clean": "node scripts/utilities/cleanBuild.mjs",
     "release:gate": "node scripts/gates/checkVersionIdentity.mjs && node scripts/gates/checkNoSecretsInRelease.mjs",
